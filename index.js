@@ -5,7 +5,6 @@
  *  @note index javascript file... handles routing, server responses/requests,
   *     orm, rss generation, ciphering, parsing url
  */
-var fs = require('fs');
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
