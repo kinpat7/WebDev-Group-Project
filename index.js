@@ -160,7 +160,7 @@ app.post('/requests', function(request, response) {
     });
 });
 /** start an instance of the app/server **/
-var server = app.listen((process.env.PORT || 80), function () {
+var server = app.listen((process.env.PORT || 8080), function () {
     var hostname = server.address().address;
     var port = server.address().port;
     console.log('App listening at http://%s:%s', hostname, port);
