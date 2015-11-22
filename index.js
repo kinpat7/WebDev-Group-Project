@@ -124,7 +124,19 @@ app.post('/enc', function(request, response) {
         requested: Date,
         ip: String
     });
-    response.send('done');
+    if (request.body.inputtext.length > 1) {
+        entry.create({
+            original: request.body.inputtext,
+            encrypted: cipher.caesar(request.body.inputtext),
+            requested: new Date(),
+            ip: getIP(request)
+        }, function(err, results) {
+            if (err) { throw err; }
+        });
+        response.send(cipher.caesar(request.body.inputtext));
+    } else {
+        response.send('No data submitted, please try again.');
+    }
 });
 
 app.post('/requests', function(request, response) {
@@ -135,18 +147,18 @@ app.post('/requests', function(request, response) {
         requested: Date,
         ip: String
     });
-    var ip = (request.headers['x-forwarded-for'] || request.connection.remoteAddress);
-    entry.find({ip: xmlCleaner.cleanRemoteAddress(ip)}, 5, ["id", "a"], function(error, results) {
+    entry.find({ip: getIP(request)}, 5, ["id", "Z"], function(error, results) {
         if (!error) {
             var requests = {requests:[]};
             for(var key in results) {
-                console.log(results[key].requested);
                 requests.requests.push({
                     request: ((results[key]))
-                })
+                });
             }
         }
-        response.send((requests));
+        var xml = nodexslt.readXmlString(json2xml(requests));
+        var xslt = nodexslt.readXsltFile('./xml/style.xsl');
+        response.send(nodexslt.transform(xslt, xml, []));
     });
 });
 
@@ -176,3 +188,9 @@ var server = app.listen((process.env.PORT || 8080), function () {
     var port = server.address().port;
     console.log('App listening at http://%s:%s', hostname, port);
 });
+
+
+function getIP(request) {
+    var ip = (request.headers['x-forwarded-for'] || request.connection.remoteAddress)
+    return xmlCleaner.cleanRemoteAddress(ip);
+}
