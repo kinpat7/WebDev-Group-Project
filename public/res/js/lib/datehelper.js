@@ -54,6 +54,10 @@ var DateHelper = function(date) {
     this.epoch = function(){
         return this.dateObj.getTime();
     }
+    this.getCurrentBigEndian = function() {
+        var d = new Date();
+        return (d.getMonth()+1)+'/'+d.getDate()+'/'+d.getFullYear()+' '+d.getHours()+':'+d.getMinutes()+':'+d.getSeconds();
+    }
 }
 module.exports = DateHelper;
 /** **/
