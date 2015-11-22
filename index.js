@@ -94,8 +94,8 @@ app.get('/rss', function(request, response) {
     var feed = new Feed({
         title: 'Cipher-com RSS Feed.',
         description: 'RSS feed to track the development stage of Cipher-com',
-        link: 'https://cipher-com.herokuapp.com/',
-        image: 'https://cipher-com.herokuapp.com/res/img/brand_logo_new.png'
+        link: 'https://cipher-natedrake13.c9users.io',
+        image: 'https://cipher-natedrake13.c9users.io/res/img/brand_logo_new.png'
     });
     var post = ormdb.define('blog', {
         id: Number,
@@ -107,7 +107,7 @@ app.get('/rss', function(request, response) {
             feed.addItem({
                 title: posts[key].title,
                 description: posts[key].description,
-                link: 'http://cipher-com.herokuapp.com/blog/' + posts[key].id
+                link: 'https://cipher-natedrake13.c9users.io/blog/' + posts[key].id
             });
         }
         response.set('Content-Type', 'application/rss+xml');
