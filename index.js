@@ -11,6 +11,8 @@ var bodyParser = require('body-parser');
 var Feed = require('feed');
 var orm = require('orm');
 var json2xml = require('json2xml');
+var nodexslt = require("node_xslt");
+var striptags = require('striptags');
 /**
  * custom packages
  */
@@ -30,7 +32,7 @@ app.set('views', __dirname + '/public/views');
 app.set('view engine', 'jade');
 
 /** Connect to our postgresql DB **/
-orm.connect('postgres://wmznuqubnhpoqp:ETFxj9YgaezDqQhA-OrIeou-7x@ec2-107-21-219-201.compute-1.amazonaws.com:5432/d3nm324q5l4nb6?ssl=true', function(err, db) {
+orm.connect('mysql://natedrake13:@localhost/c9', function(err, db) {
     if (err) { throw err; }
     ormdb = db;
 });
@@ -66,10 +68,20 @@ app.get('/blog/:id', function(request, response) {
         title: String,
         description: String
     });
+    var comment = ormdb.define('comments', {
+        id: Number,
+        body: String,
+        posted: Date,
+        post: Number,
+        comment: Number
+    });
     post.find({id: request.params.id}, 1, function(error, post) {
         if (!error) {
-            response.render('post', {post: post[0]});
-
+            comment.find({post: request.params.id}, ["posted", "Z"], function(error, comments) {
+                if (!error) {
+                    response.render('post', {post: post[0], comments: comments});
+                }
+            });
         } else {
             response.render('error', {});
         }
@@ -96,7 +108,7 @@ app.get('/rss', function(request, response) {
                 title: posts[key].title,
                 description: posts[key].description,
                 link: 'http://cipher-com.herokuapp.com/blog/' + posts[key].id
-            })
+            });
         }
         response.set('Content-Type', 'application/rss+xml');
         response.send(xmlCleaner.cleanRSS(feed.render('rss-2.0')));
@@ -112,29 +124,7 @@ app.post('/enc', function(request, response) {
         requested: Date,
         ip: String
     });
-    var encryptedText = json2xml({
-        cipher: {
-            value: cipher.caesar(cipher.string),
-            type: 'caesar'
-        }
-    });
-    /** use request.headers to obtain the users IP information over a secure https request **/
-    var ip = request.headers['x-forwarded-for'] || request.connection.remoteAddress;
-    /** clean anything other than [0-9] and [.] **/
-    ip = xmlCleaner.cleanRemoteAddress(ip);
-    dateHelper = new DateHelper(new Date());
-    console.log((dateHelper.datetime()).toString());
-    entry.create({
-        original: cipher.string,
-        encrypted: cipher.caesar(cipher.string),
-        ip: ip,
-        requested: dateHelper.datetime()
-    }, function(error) {
-        if (error) {
-            throw error;
-        }
-    });
-    response.send(encryptedText);
+    response.send('done');
 });
 
 app.post('/requests', function(request, response) {
@@ -142,7 +132,7 @@ app.post('/requests', function(request, response) {
         id: Number,
         original: String,
         encrypted: String,
-        requested: Number,
+        requested: Date,
         ip: String
     });
     var ip = (request.headers['x-forwarded-for'] || request.connection.remoteAddress);
@@ -156,9 +146,30 @@ app.post('/requests', function(request, response) {
                 })
             }
         }
-        response.send(json2xml(requests));
+        response.send((requests));
     });
 });
+
+
+app.post('/comment', function(request, response) {
+    var comment = ormdb.define('comments', {
+       id: Number,
+       body: String,
+       posted: Date,
+       post: Number,
+       comment: Number
+    });
+   if (typeof(request.body.comment) !== undefined) {
+        comment.create({ 
+           body: striptags(request.body.body), 
+           posted: new Date(), 
+           post: striptags(request.body.postid)
+        }, function(err, results) {
+           if (err) { throw err; }
+        });
+   }
+});
+
 /** start an instance of the app/server **/
 var server = app.listen((process.env.PORT || 8080), function () {
     var hostname = server.address().address;
