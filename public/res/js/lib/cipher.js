@@ -64,18 +64,23 @@ function offset(offset) {
  * @param string
  * @returns {string}
  */
-function caesar(string) {
+function caesar() {
     var enc = '';
-    for(var i = 0; i < string.length; i++ ) {
-        if (string.charAt(i).match(/\s|\d|[^a-zA-Z]/)) {
-            enc += string.charAt(i);
+    for(var i = 0; i < this.string.length; i++ ) {
+        if (this.string.charAt(i).match(/\s|\d|[^a-zA-Z]/)) {
+            enc += this.string.charAt(i);
             continue;
         }
-        var charPos = alphabetArray[string.charAt(i)];
+        var charPos  = alphabetArray[(this.string.charAt(i)).toLowerCase()];
         if ((charPos + this.offset) >= alphabet.length) {
             charPos = -(alphabet.length - (charPos));
         }
-        enc += alphabet[charPos + this.offset];
+        if (this.string.charAt(i).match(/[A-Z]/)) {
+            console.log(this.string.charAt(i));
+            enc += alphabetCapital[charPos + this.offset];
+        } else if (this.string.charAt(i).match(/[a-z]/)) {
+            enc += alphabet[charPos + this.offset];
+        }
     }
     return enc;
 }
