@@ -1,9 +1,10 @@
 create table if not exists feeds (
-    id serial primary key,
+    id int(11) not null auto_increment,
     title varchar(20) not null,
     description text not null,
     link varchar(255) not null,
-    image varchar(255) not null
+    image varchar(255) not null,
+    primary key(id)
 );
 
 insert into feeds (
