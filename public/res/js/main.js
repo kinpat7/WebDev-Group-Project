@@ -10,6 +10,9 @@ ajaxurls["comments"] = 'https://cipher-natedrake13.c9users.io/comment';
 
 /** $(document).onready **/
 $(function(){
+    if($('#input-select option:selected').val() === 'vig') {
+        addCipherKeyInput();
+    }
     /**
      *  @note prevent default on forms on submit event to stop page refreshing on submit.
      **/
@@ -18,6 +21,7 @@ $(function(){
             event.preventDefault();
         });
     });
+    
     /**
      *  @note send request to encrypt text
      */
@@ -35,6 +39,27 @@ $(function(){
             }, 2000);
         });
     });
+    
+    $('#input-select').on('change', function(event) {
+        var selectedCipher = $('#input-select option:selected').val();
+        if ($('.keywrapper').length > 0) {
+            $('.keywrapper').remove();
+        }
+        if (selectedCipher === 'vig') {
+            addCipherKeyInput();
+        }
+    });
+    
+    /**
+     *  submit a comment to a post
+     */
+    $('#submit-comment').on('click', function(event) {
+        $.post(ajaxurls['comments'], $('#comment-form').serializeArray(), function(data) {
+            updateComments()
+        });
+    });
+    
+    
     /**
      *  load previous requests
      *
@@ -42,17 +67,6 @@ $(function(){
     $('#requests').ready(function(event) {
         updatePreviousRequests();
     });
-    
-    /**
-     *  submit a comment to a post
-     */
-    $('#submit-comment').on('click', function(event) {
-        console.log($('#comment-form').serializeArray().postid);
-        $.post(ajaxurls['comments'], $('#comment-form').serializeArray(), function(data) {
-            updateComments()
-        });
-    });
-    
 });
 
 function updatePreviousRequests() {
@@ -64,4 +78,14 @@ function updatePreviousRequests() {
 function updateComments(postid) {
     $.post('/getcomments', {postid: postid}, function(data) {
     });
+}
+
+function addCipherKeyInput() {
+    var cipherKeyInput = $(
+        '<div class="form-group keywrapper">'+
+        '<label for="cipher-key">Choose a Key Phrase <em><small> [] </small><em/></label>'+
+        '<input id="cipher-key" name="cipherkey" class="form-control" autocomplete="no" placeholder="Choose a key for encryption" required="true">'+
+        '</div>'
+    );
+    $('#input-select').parent().prev().after(cipherKeyInput);
 }
