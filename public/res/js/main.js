@@ -22,9 +22,17 @@ $(function(){
      *  @note send request to encrypt text
      */
     $('#encrypt-form').submit(function() {
+        $('#encrypt-btn').button('loading');
         /** serialize the form data **/
         var formData = ($(this).serializeArray());
         $.post('/enc', formData, function(data) {
+            setTimeout(function() {
+                $('#encrypt-btn').button('reset');
+                // ='popover', title='Your Encrypted Text', data-content=""
+                $('#encrypt-btn').attr('data-toggle', 'popover').attr('data-content', data).attr('data-trigger', 'focus').attr('role', 'button');
+                $('#encrypt-btn').popover('show');
+                updatePreviousRequests();
+            }, 2000);
         });
     });
     /**
@@ -49,6 +57,7 @@ $(function(){
 
 function updatePreviousRequests() {
     $.post('/requests', '', function(data) {
+        $('#requests').html(data);
     });
 }
 
