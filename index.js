@@ -117,6 +117,18 @@ app.get('/rss', function(request, response) {
 /** Post Requests **/
 app.post('/enc', function(request, response) {
     var cipher = new Cipher(request.body.inputtext);
+    var encryptedText = '';
+    switch(request.body.cipherinput) {
+        case 'cae':
+            cipher.setOffset(3);
+            encryptedText = cipher.caesar();
+            break;
+        case 'vig':
+            encryptedText = cipher.vigenere(request.body.cipherkey)
+            break;
+        default:
+            break;
+    }
     var entry = ormdb.define('requests', {
         id: Number,
         original: String,
@@ -127,13 +139,13 @@ app.post('/enc', function(request, response) {
     if (request.body.inputtext.length > 1) {
         entry.create({
             original: request.body.inputtext,
-            encrypted: cipher.caesar(request.body.inputtext),
+            encrypted: encryptedText,
             requested: new Date(),
             ip: getIP(request)
         }, function(err, results) {
             if (err) { throw err; }
         });
-        response.send(cipher.caesar(request.body.inputtext));
+        response.send(encryptedText);
     } else {
         response.send('No data submitted, please try again.');
     }
