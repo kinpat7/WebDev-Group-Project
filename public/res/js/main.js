@@ -4,6 +4,9 @@
  *  @date 10/11/2015
  *  @note controls ajax calls
  */
+ 
+var ajaxurls = [];
+ajaxurls["comments"] = 'https://cipher-natedrake13.c9users.io/comment';
 
 /** $(document).onready **/
 $(function(){
@@ -17,8 +20,6 @@ $(function(){
     });
     /**
      *  @note send request to encrypt text
-     *      perform XSL transformation & append
-     *      transformed html
      */
     $('#encrypt-form').submit(function() {
         /** serialize the form data **/
@@ -33,10 +34,25 @@ $(function(){
     $('#requests').ready(function(event) {
         updatePreviousRequests();
     });
+    
+    /**
+     *  submit a comment to a post
+     */
+    $('#submit-comment').on('click', function(event) {
+        console.log($('#comment-form').serializeArray().postid);
+        $.post(ajaxurls['comments'], $('#comment-form').serializeArray(), function(data) {
+            updateComments()
+        });
+    });
+    
 });
 
 function updatePreviousRequests() {
     $.post('/requests', '', function(data) {
-        
+    });
+}
+
+function updateComments(postid) {
+    $.post('/getcomments', {postid: postid}, function(data) {
     });
 }
