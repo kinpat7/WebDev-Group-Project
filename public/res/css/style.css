@@ -54,28 +54,29 @@ input {
     padding : 1.3em;
 }
 
+.comment-box {
+    min-height: 110px;
+    width : 75%;
+}
+
+.comments {
+    padding : 1.35em;
+}
+
 /**
  *  custom bootstrap classes
  *
  */
 
- .marg-50-left {
-     width : 49%;
-     margin-left : .4%;
-     margin-right: .4%;
-     float : left;
- }
- .marg-50-left.output-panel {
+.marg-50-left {
+ width : 49%;
+ margin-left : .4%;
+ margin-right: .4%;
+ float : left;
+}
 
- }
 .output-panel {
     padding : 1.2em;
-}
-#output-panel {
-
-}
-
-#responses > h3 {
 }
 
 #requests {
