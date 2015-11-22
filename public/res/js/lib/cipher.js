@@ -54,36 +54,55 @@ alphabetArray["y"] = 24;
 alphabetArray["z"] = 25;
 
 /**
- * @param offset
+ * @param string
+ * @returns {string}
  */
-function offset(offset) {
+function caesar(offset) {
+    var enc = '';
     this.offset = offset;
+    for(var i = 0; i < this.string.length; i++ ) {
+        /** Caesar cipher will allow spaces and symbols, other cipher will remove all **/
+        if (this.string.charAt(i).match(/\s|\d|[^a-zA-Z]/)) {
+            /** append allowed characters **/
+            enc += this.string.charAt(i);
+            /** finish current iteration of the loop **/
+            continue;
+        }
+        /** get the integer value for the position of the current letter **/
+        var iLetter = parseInt(alphabetArray[this.string.charAt(i)]);
+        /** append the encrypted letter to the encrypted phrase **/
+        enc += alphabetCapital[((iLetter+this.offset)%alphabet.length)];
+    }
+    return enc;
 }
 
 /**
  * @param string
  * @returns {string}
  */
-function caesar() {
+function vigenere(key) {
     var enc = '';
-    for(var i = 0; i < this.string.length; i++ ) {
-        if (this.string.charAt(i).match(/\s|\d|[^a-zA-Z]/)) {
-            enc += this.string.charAt(i);
-            continue;
-        }
-        var charPos  = alphabetArray[(this.string.charAt(i)).toLowerCase()];
-        if ((charPos + this.offset) >= alphabet.length) {
-            charPos = -(alphabet.length - (charPos));
-        }
-        if (this.string.charAt(i).match(/[A-Z]/)) {
-            console.log(this.string.charAt(i));
-            enc += alphabetCapital[charPos + this.offset];
-        } else if (this.string.charAt(i).match(/[a-z]/)) {
-            enc += alphabet[charPos + this.offset];
-        }
+    this.string = this.string.replace(/\s|\d|[^a-zA-Z]/g, '');
+    for(var i = 0; i < this.string.length; i++) {
+        /** integer of each letters position in alphabet, e.g. a=0, b=1, .., z=25 **/
+        var iLetter = parseInt(alphabetArray[this.string.charAt(i)]);
+        /** corresponding key letter **/
+        var sKey = key.charAt(i % key.length);
+        /** get the integer value of key letter **/
+        var iKey = parseInt(alphabetArray[sKey]);
+        /** append the encrypted letter to the encrypted phrase **/
+        enc += (alphabetCapital[((iLetter + iKey)%alphabet.length)]);
     }
     return enc;
 }
+
+/**
+ * @param int
+ */
+function setOffset(offset) {
+    this.offset = offset;
+}
+
 
 /**
  * @param string
@@ -92,7 +111,7 @@ function caesar() {
 var Cipher = function(string) {
     this.string = string;
     this.caesar = caesar;
-    this.offset = 3;
+    this.setOffset = setOffset;
+    this.vigenere = vigenere;
 };
-
 module.exports = Cipher;
