@@ -57,9 +57,11 @@ alphabetArray["z"] = 25;
  * @param string
  * @returns {string}
  */
-function caesar(offset) {
+function caesar() {
     var enc = '';
-    this.offset = offset;
+    if (typeof(this.offset) === undefined) {
+        this.offset = 3;
+    }
     for(var i = 0; i < this.string.length; i++ ) {
         /** Caesar cipher will allow spaces and symbols, other cipher will remove all **/
         if (this.string.charAt(i).match(/\s|\d|[^a-zA-Z]/)) {
@@ -69,7 +71,7 @@ function caesar(offset) {
             continue;
         }
         /** get the integer value for the position of the current letter **/
-        var iLetter = parseInt(alphabetArray[this.string.charAt(i)]);
+        var iLetter = parseInt(alphabetArray[this.string.charAt(i).toLowerCase()]);
         /** append the encrypted letter to the encrypted phrase **/
         enc += alphabetCapital[((iLetter+this.offset)%alphabet.length)];
     }
@@ -79,6 +81,11 @@ function caesar(offset) {
 /**
  * @param string
  * @returns {string}
+ * @note formula for vigenere cipher
+ *      E=(M[i] + K[i]) % 26
+ *      D=(M[i] - K[i]) % 26
+ *      where: M[i] = i-th character of input text,
+ *      K[i] = i-th character of key
  */
 function vigenere(key) {
     var enc = '';
@@ -102,7 +109,6 @@ function vigenere(key) {
 function setOffset(offset) {
     this.offset = offset;
 }
-
 
 /**
  * @param string
