@@ -5,6 +5,7 @@
  *  @note index javascript file... handles routing, server responses/requests,
   *     orm, rss generation, ciphering, parsing url
  */
+var fs = require("fs");
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
@@ -13,6 +14,7 @@ var orm = require('orm');
 var json2xml = require('json2xml');
 var nodexslt = require("node_xslt");
 var striptags = require('striptags');
+var XMLWriter = require("xml-writer")
 /**
  * custom packages
  */
@@ -24,6 +26,7 @@ var DateHelper = require('./public/res/js/lib/datehelper.js');
 var ormdb;
 var xmlCleaner = new XMLCleaner();
 var dateHelper;
+var xmlWriter = new XMLWriter(true);    /** true param if xml to be indented **/
 
 /** for calling js, and css files, etc... **/
 app.use(express.static(__dirname + '/public'));
@@ -114,10 +117,26 @@ app.get('/rss', function(request, response) {
         response.send(xmlCleaner.cleanRSS(feed.render('rss-2.0')));
     });
 });
+
+app.get('/archive', function(request, response) {
+    var xml = nodexslt.readXmlFile(__dirname+'/xml/request.xml');
+    var xslt = nodexslt.readXsltFile(__dirname+'/xml/style.xsl');
+    response.send(nodexslt.transform(xslt, xml, []));
+});
 /** Post Requests **/
 app.post('/enc', function(request, response) {
+    /** Define the model of our encryption request object **/
+    var entry = ormdb.define('requests', {
+        id: Number,
+        original: String,
+        encrypted: String,
+        requested: Date,
+        ip: String
+    });
+    /** Create the cipher object, used to encrypt the submitted text **/
     var cipher = new Cipher(request.body.inputtext);
     var encryptedText = '';
+    /** check which cipher was selected in request **/
     switch(request.body.cipherinput) {
         case 'cae':
             cipher.setOffset(3);
@@ -129,13 +148,7 @@ app.post('/enc', function(request, response) {
         default:
             break;
     }
-    var entry = ormdb.define('requests', {
-        id: Number,
-        original: String,
-        encrypted: String,
-        requested: Date,
-        ip: String
-    });
+    /** make sure the user has submitted data **/
     if (request.body.inputtext.length > 1) {
         entry.create({
             original: request.body.inputtext,
@@ -144,6 +157,42 @@ app.post('/enc', function(request, response) {
             ip: getIP(request)
         }, function(err, results) {
             if (err) { throw err; }
+            entry.find({}, function(error, results) {
+                /**
+                 * update our xml archive 
+                 **/
+                xmlWriter.startDocument();
+                xmlWriter.startElement('requests');
+                /** write namespace and schema definitions **/
+                xmlWriter
+                    .writeAttribute('xmlns:xsi','http://www.w3.org/2001/XMLSchema-instance')
+                    .writeAttribute('xsi:noNamespaceSchemaLocation', __dirname+'/xml/schema.xsd');
+                if (error)  { throw error; }
+                for(var key in results) {
+                    
+                    /** 
+                     * create a datehelper object form UTC string passed from sql server 
+                     *      SQL is returning date as Wed, 5 Nov 2015 16:51:12 GMT +0000 (UTC)
+                     *      using datehelper and Date.parse method we can return dd/mm/yyyy hh:ii:ss
+                    **/
+                    var d = new DateHelper(Date.parse(results[key].requested));
+                    
+                    xmlWriter.startElement('request');
+                    xmlWriter.writeElement('original', results[key].original);
+                    xmlWriter.writeElement('encrypted', results[key].encrypted);
+                    xmlWriter.writeElement('requested', d.getCurrentBigEndian());
+                    xmlWriter.writeElement('ip', results[key].ip);
+                    xmlWriter.endElement();  /** close the request element **/
+                }
+                /** close the root element {requests} **/
+                xmlWriter.endElement();
+                /** end the xml document **/
+                xmlWriter.endDocument();
+                /** use r+ flag to overwrite previous xml file so as not to append redundant data **/
+                fs.writeFile(__dirname+'/xml/requests.xml', xmlWriter.toString(), {flags: 'r+'}, function(error) {
+                    if (error) { throw error; }
+                });
+            });
         });
         response.send(encryptedText);
     } else {
