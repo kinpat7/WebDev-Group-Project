@@ -1,285 +1,303 @@
 <?xml version="1.0"?>
-<requests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="/home/ubuntu/workspace/xml/schema.xsd">
+<cc:requests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://cipher-natedrake13.c9users.io/ns/tns /home/ubuntu/workspace/xml/schema.xsd" xmlns="https://cipher-natedrake13.c9users.io/ns/tns" xmlns:cc="https://cipher-natedrake13.c9users.io/ns/tns">
     <request>
         <original>amazing</original>
         <encrypted>CMTBIGI</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>46.7.214.153</ip>
     </request>
     <request>
         <original>amazing</original>
         <encrypted>TTIRAUU</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>46.7.214.153</ip>
     </request>
     <request>
         <original>attack from the north</original>
         <encrypted>DWWDFN IURP WKH QRUWK</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>46.7.214.153</ip>
     </request>
     <request>
         <original>reinforcements from the south east</original>
         <encrypted>XSLOQSJUXTIXBFLXCPUSIKGNALOIFZ</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>46.7.214.153</ip>
     </request>
     <request>
         <original>Test</original>
         <encrypted>WHVW</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>92.251.255.11</ip>
     </request>
     <request>
         <original>Test</original>
         <encrypted>WHVW</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>89.101.233.162</ip>
     </request>
     <request>
         <original>this is a test. this should be amazing</original>
         <encrypted>MLALBWSMXWLMAMKLASMEWFWTFERBGK</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>89.101.233.162</ip>
     </request>
     <request>
         <original>yomamma</original>
         <encrypted>BRPDPPD</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>89.101.233.162</ip>
     </request>
     <request>
         <original>This is a test</original>
         <encrypted>WKLV LV D WHVW</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>193.1.209.100</ip>
     </request>
     <request>
         <original>this is a test</original>
         <encrypted>VHBUILCTXUT</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>193.1.209.100</ip>
     </request>
     <request>
         <original>test</original>
         <encrypted>MLAL</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>193.1.209.100</ip>
     </request>
     <request>
         <original>test</original>
         <encrypted>MLAL</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>193.1.209.100</ip>
     </request>
     <request>
         <original>test</original>
         <encrypted>DIQM</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>193.1.209.100</ip>
     </request>
     <request>
         <original>test</original>
         <encrypted>WHVW</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>193.1.209.100</ip>
     </request>
     <request>
         <original>test</original>
         <encrypted>WHVW</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>193.1.209.100</ip>
     </request>
     <request>
         <original>test</original>
         <encrypted>WHVW</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>193.1.209.100</ip>
     </request>
     <request>
         <original>test</original>
         <encrypted>WHVW</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>193.1.209.100</ip>
     </request>
     <request>
         <original>test</original>
         <encrypted>WHVW</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>193.1.209.100</ip>
     </request>
     <request>
         <original>test</original>
         <encrypted>WHVW</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>193.1.209.100</ip>
     </request>
     <request>
         <original>test</original>
         <encrypted>WHVW</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>193.1.209.100</ip>
     </request>
     <request>
         <original>test</original>
         <encrypted>WHVW</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>193.1.209.100</ip>
     </request>
     <request>
         <original>test</original>
         <encrypted>WHVW</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>193.1.209.100</ip>
     </request>
     <request>
         <original>attack from the north</original>
         <encrypted>DWWDFN IURP WKH QRUWK</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>193.1.209.100</ip>
     </request>
     <request>
         <original>this is a test</original>
         <encrypted>WKLV LV D WHVW</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>46.7.214.153</ip>
     </request>
     <request>
         <original>another test</original>
         <encrypted>DQRWKHU WHVW</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>46.7.214.153</ip>
     </request>
     <request>
         <original>testing</original>
         <encrypted>WHVWLQJ</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>46.7.214.153</ip>
     </request>
     <request>
         <original>testing</original>
         <encrypted>WHVWLQJ</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>46.7.214.153</ip>
     </request>
     <request>
         <original>testing</original>
         <encrypted>WHVWLQJ</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>46.7.214.153</ip>
     </request>
     <request>
         <original>testing again</original>
         <encrypted>WHVWLQJ DJDLQ</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>46.7.214.153</ip>
     </request>
     <request>
         <original>another test</original>
         <encrypted>DQRWKHU WHVW</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>46.7.214.153</ip>
     </request>
     <request>
         <original>hopefully it's working</original>
         <encrypted>KRSHIXOOB LW'V ZRUNLQJ</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>46.7.214.153</ip>
     </request>
     <request>
         <original>hopefully it's working</original>
         <encrypted>KRSHIXOOB LW'V ZRUNLQJ</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>46.7.214.153</ip>
     </request>
     <request>
         <original>test</original>
         <encrypted>WHVW</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>46.7.214.153</ip>
     </request>
     <request>
         <original>test</original>
         <encrypted>WHVW</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>46.7.214.153</ip>
     </request>
     <request>
         <original>this is a test again!</original>
         <encrypted>WKLV LV D WHVW DJDLQ!</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>46.7.214.153</ip>
     </request>
     <request>
         <original>this is a test again!</original>
         <encrypted>WKLV LV D WHVW DJDLQ!</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>46.7.214.153</ip>
     </request>
     <request>
         <original>this is a test again!</original>
         <encrypted>WKLV LV D WHVW DJDLQ!</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>46.7.214.153</ip>
     </request>
     <request>
         <original>this is a test again!</original>
         <encrypted>WKLV LV D WHVW DJDLQ!</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>46.7.214.153</ip>
     </request>
     <request>
         <original>this is a test again!</original>
         <encrypted>WKLV LV D WHVW DJDLQ!</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>46.7.214.153</ip>
     </request>
     <request>
         <original>this is a test again!</original>
         <encrypted>WKLV LV D WHVW DJDLQ!</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>46.7.214.153</ip>
     </request>
     <request>
         <original>this is a test again!</original>
         <encrypted>WKLV LV D WHVW DJDLQ!</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>46.7.214.153</ip>
     </request>
     <request>
         <original>this should also be appended to archive</original>
         <encrypted>WKLV VKRXOG DOVR EH DSSHQGHG WR DUFKLYH</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>46.7.214.153</ip>
     </request>
     <request>
         <original>please append</original>
         <encrypted>SOHDVH DSSHQG</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>46.7.214.153</ip>
     </request>
     <request>
         <original>appended?</original>
         <encrypted>DSSHQGHG?</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>46.7.214.153</ip>
     </request>
     <request>
         <original>anothero ne</original>
         <encrypted>DQRWKHUR QH</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>46.7.214.153</ip>
     </request>
     <request>
         <original>will this overwrite?</original>
         <encrypted>ZLOO WKLV RYHUZULWH?</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>46.7.214.153</ip>
     </request>
     <request>
         <original>will this overwrite?</original>
         <encrypted>ZLOO WKLV RYHUZULWH?</encrypted>
-        <requested>11/26/2015 0:21:11</requested>
+        <requested>11/26/2015 0:49:16</requested>
         <ip>46.7.214.153</ip>
     </request>
-</requests>
+    <request>
+        <original>correct namespace?</original>
+        <encrypted>FRUUHFW QDPHVSDFH?</encrypted>
+        <requested>11/26/2015 0:49:16</requested>
+        <ip>46.7.214.153</ip>
+    </request>
+    <request>
+        <original>namespace?</original>
+        <encrypted>QDPHVSDFH?</encrypted>
+        <requested>11/26/2015 0:49:16</requested>
+        <ip>46.7.214.153</ip>
+    </request>
+    <request>
+        <original>updating xml namespaces</original>
+        <encrypted>XSGDWLQJ APO QDPHVSDFHV</encrypted>
+        <requested>11/26/2015 0:49:16</requested>
+        <ip>46.7.214.153</ip>
+    </request>
+</cc:requests>
