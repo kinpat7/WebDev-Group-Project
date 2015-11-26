@@ -1,5 +1,9 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://cipher-com.herokuapp.com/ns/tns" xmlns:cc="http://cipher-com.herokuapp.com/ns/tns" elementFormDefault="qualified">
+<xs:schema 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="https://cipher-natedrake13.c9users.io/ns/tns" 
+	xmlns:cc="https://cipher-natedrake13.c9users.io/ns/tns" 
+	elementFormDefault="qualified">
 	<!-- Schema Documentation -->
 	<xs:annotation>
 		<xs:documentation>
