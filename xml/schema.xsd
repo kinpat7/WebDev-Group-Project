@@ -10,4 +10,8 @@
 			This XML Schema will be used to validate all encryption requests. It enforces data structures that all requests must follow.
 		</xs:documentation>
 	</xs:annotation>
+	
+	<xs:element name="cc:requests">
+		
+	</xs:element>
 </xs:schema>
