@@ -119,7 +119,7 @@ app.get('/rss', function(request, response) {
 });
 
 app.get('/archive', function(request, response) {
-    var xml = nodexslt.readXmlFile(__dirname+'/xml/request.xml');
+    var xml = nodexslt.readXmlFile(__dirname+'/xml/requests.xml');
     var xslt = nodexslt.readXsltFile(__dirname+'/xml/style.xsl');
     response.send(nodexslt.transform(xslt, xml, []));
 });
@@ -162,11 +162,13 @@ app.post('/enc', function(request, response) {
                  * update our xml archive 
                  **/
                 xmlWriter.startDocument();
-                xmlWriter.startElement('requests');
+                xmlWriter.startElement('cc:requests');
                 /** write namespace and schema definitions **/
                 xmlWriter
                     .writeAttribute('xmlns:xsi','http://www.w3.org/2001/XMLSchema-instance')
-                    .writeAttribute('xsi:noNamespaceSchemaLocation', __dirname+'/xml/schema.xsd');
+                    .writeAttribute('xsi:schemaLocation', 'https://cipher-natedrake13.c9users.io/ns/tns '+__dirname+'/xml/schema.xsd')
+                    .writeAttribute('xmlns', 'http://www.w3.org/1999/XSL/Transform')
+                    .writeAttribute('xmlns:cc', 'https://cipher-natedrake13.c9users.io/ns/tns');
                 if (error)  { throw error; }
                 for(var key in results) {
                     
@@ -177,7 +179,7 @@ app.post('/enc', function(request, response) {
                     **/
                     var d = new DateHelper(Date.parse(results[key].requested));
                     
-                    xmlWriter.startElement('request');
+                    xmlWriter.startElement('cc:request');
                     xmlWriter.writeElement('original', results[key].original);
                     xmlWriter.writeElement('encrypted', results[key].encrypted);
                     xmlWriter.writeElement('requested', d.getCurrentBigEndian());
