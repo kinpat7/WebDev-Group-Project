@@ -89,10 +89,11 @@ function caesar() {
  */
 function vigenere(key) {
     var enc = '';
+    /** replace all non digits or letter for better security **/
     this.string = this.string.replace(/\s|\d|[^a-zA-Z]/g, '');
     for(var i = 0; i < this.string.length; i++) {
         /** integer of each letters position in alphabet, e.g. a=0, b=1, .., z=25 **/
-        var iLetter = parseInt(alphabetArray[this.string.charAt(i)]);
+        var iLetter = parseInt(alphabetArray[this.string.charAt(i).toLowerCase()]);
         /** corresponding key letter **/
         var sKey = key.charAt(i % key.length);
         /** get the integer value of key letter **/
