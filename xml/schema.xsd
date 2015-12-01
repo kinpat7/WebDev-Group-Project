@@ -12,6 +12,31 @@
 	</xs:annotation>
 	
 	<xs:element name="cc:requests">
-		
+    		<xs:complexType>
+        		<xs:sequence>
+        		<xs:element ref="cc:request" minOccurs="1" maxOccurs="unbounded" />
+    			</xs:sequence>
+    		</xs:complexType>
+	</xs:element>
+	
+			<xs:element name="original" type "xs:string">
+			<xs:element name="encrypted" type "xs:string">
+			<xs:element name="requested" type "xs:int">
+			<xs:element name="ip" type "xs:decimal">
+	
+<xs:element name="cc:request">
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element ref="original" minOccurs="1" maxOccurs="1" />
+          <xs:element ref="encrypted" minOccurs="1" maxOccurs="1" />
+          <xs:element ref="requested" minOccurs="1" maxOccurs="1" />
+          <xs:element ref="ip" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:element>
+				
+				
+				
+				
 	</xs:element>
 </xs:schema>
