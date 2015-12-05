@@ -261,13 +261,15 @@ app.post('/comment', function(request, response) {
        comment: Number
     });
    if (typeof(request.body.comment) !== undefined) {
-        comment.create({ 
-           body: striptags(request.body.body), 
-           posted: new Date(), 
-           post: striptags(request.body.postid)
-        }, function(err, results) {
-           if (err) { throw err; }
-        });
+       if (request.body.body.length >= 1 ) {
+           comment.create({ 
+               body: striptags(request.body.body), 
+               posted: new Date(), 
+               post: striptags(request.body.postid)
+            }, function(err, results) {
+               if (err) { throw err; }
+            });
+       }
    }
 });
 
