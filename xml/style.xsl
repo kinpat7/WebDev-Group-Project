@@ -14,17 +14,15 @@
     
     <xsl:template match="requests">
         <table class="table table-striped table-bordered">
+            <h2>Your Latest Encoded Messages</h2>
             <thead>
-                <h4>Your Latest Requests</h4>
                 <hr />
                 <tr>
-                    <th>Input</th>
-                    <th>Output</th>
+                    <th>Encoded Message</th>
                 </tr>
             </thead>
             <xsl:for-each select="request">
                     <tr>
-                        <td><xsl:value-of select="original" /></td>
                         <td><xsl:value-of select="encrypted" /></td>
                     </tr>
             </xsl:for-each>
@@ -34,10 +32,10 @@
     <xsl:template match="cc:requests">
         <html>
             <head>
-                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous" />
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
                 <link rel="stylesheet" href="../res/css/style.css"/>
                 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
             </head>
             <body>
                 <div class="row">
@@ -49,16 +47,14 @@
                                     <h4>Archive of requests</h4>
                                     <hr />
                                     <tr>
-                                        <th>Output</th>
+                                        <th>Encoded Text</th>
                                         <th>DateTime</th>
-                                        <th>IP</th>
                                     </tr>
                                 </thead>
                                 <xsl:for-each select="cc:request">
                                     <tr>
                                         <td><xsl:value-of select="cc:encrypted" /></td>
                                         <td><xsl:value-of select="cc:requested" /></td>
-                                        <td><xsl:value-of select="cc:ip" /></td>
                                     </tr>
                                 </xsl:for-each>
                             </table>
