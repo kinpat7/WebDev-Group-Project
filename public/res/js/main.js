@@ -55,9 +55,11 @@ $(function(){
      *  submit a comment to a post
      */
     $('#submit-comment').on('click', function(event) {
-        $.post(ajaxurls['comments'], $('#comment-form').serializeArray(), function(data) {
-            updateComments()
-        });
+        if($('#comment-body').val().length > 0) {
+            $.post(ajaxurls['comments'], $('#comment-form').serializeArray(), function(data) {
+                updateComments()
+            });
+        }
     });
     
     
