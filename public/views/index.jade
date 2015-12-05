@@ -13,11 +13,11 @@ block content
                   | Type a phrase you would like to encrypt. Choose a cipher to encrypt your text and click encrypt to reveal the encrypted text.
             .control-panel
               form#encrypt-form.marg-50-left
-                h4 Perform a cipher
+                h2 Perform a Cipher
                 hr
                 .form-group
                   label(for='input-text') Text to Encrypt
-                  input#input-text.form-control(type='text', name='inputtext', placeholder='Text to encrypt', autocomplete='off')
+                  input#input-text.form-control(type='text', name='inputtext', placeholder='Text to encrypt', autocomplete='off' required='required')
                 .form-group
                   label(for='input-select') Cipher
                   select#input-select.form-control(name='cipherinput')
