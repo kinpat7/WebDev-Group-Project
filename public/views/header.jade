@@ -31,4 +31,9 @@ html
                         li
                             a#archive-link(href='/archive') Archive
                     ul.nav.navbar-nav.navbar-right
+        script.
+          ((window.gitter = {}).chat = {}).options = {
+            room: 'kinpat7/WebDev-Group-Project'
+          };
+        script(src='https://sidecar.gitter.im/dist/sidecar.v1.js', async='', defer='')
         block content
