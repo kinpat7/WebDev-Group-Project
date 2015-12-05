@@ -1,303 +1,183 @@
 <?xml version="1.0"?>
-<cc:requests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://cipher-natedrake13.c9users.io/ns/tns /home/ubuntu/workspace/xml/schema.xsd" xmlns="https://cipher-natedrake13.c9users.io/ns/tns" xmlns:cc="https://cipher-natedrake13.c9users.io/ns/tns">
-    <request>
-        <original>amazing</original>
-        <encrypted>CMTBIGI</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>46.7.214.153</ip>
-    </request>
-    <request>
-        <original>amazing</original>
-        <encrypted>TTIRAUU</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>46.7.214.153</ip>
-    </request>
-    <request>
-        <original>attack from the north</original>
-        <encrypted>DWWDFN IURP WKH QRUWK</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>46.7.214.153</ip>
-    </request>
-    <request>
-        <original>reinforcements from the south east</original>
-        <encrypted>XSLOQSJUXTIXBFLXCPUSIKGNALOIFZ</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>46.7.214.153</ip>
-    </request>
-    <request>
-        <original>Test</original>
-        <encrypted>WHVW</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>92.251.255.11</ip>
-    </request>
-    <request>
-        <original>Test</original>
-        <encrypted>WHVW</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>89.101.233.162</ip>
-    </request>
-    <request>
-        <original>this is a test. this should be amazing</original>
-        <encrypted>MLALBWSMXWLMAMKLASMEWFWTFERBGK</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>89.101.233.162</ip>
-    </request>
-    <request>
-        <original>yomamma</original>
-        <encrypted>BRPDPPD</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>89.101.233.162</ip>
-    </request>
-    <request>
-        <original>This is a test</original>
-        <encrypted>WKLV LV D WHVW</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>193.1.209.100</ip>
-    </request>
-    <request>
-        <original>this is a test</original>
-        <encrypted>VHBUILCTXUT</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>193.1.209.100</ip>
-    </request>
-    <request>
-        <original>test</original>
-        <encrypted>MLAL</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>193.1.209.100</ip>
-    </request>
-    <request>
-        <original>test</original>
-        <encrypted>MLAL</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>193.1.209.100</ip>
-    </request>
-    <request>
-        <original>test</original>
-        <encrypted>DIQM</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>193.1.209.100</ip>
-    </request>
-    <request>
-        <original>test</original>
-        <encrypted>WHVW</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>193.1.209.100</ip>
-    </request>
-    <request>
-        <original>test</original>
-        <encrypted>WHVW</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>193.1.209.100</ip>
-    </request>
-    <request>
-        <original>test</original>
-        <encrypted>WHVW</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>193.1.209.100</ip>
-    </request>
-    <request>
-        <original>test</original>
-        <encrypted>WHVW</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>193.1.209.100</ip>
-    </request>
-    <request>
-        <original>test</original>
-        <encrypted>WHVW</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>193.1.209.100</ip>
-    </request>
-    <request>
-        <original>test</original>
-        <encrypted>WHVW</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>193.1.209.100</ip>
-    </request>
-    <request>
-        <original>test</original>
-        <encrypted>WHVW</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>193.1.209.100</ip>
-    </request>
-    <request>
-        <original>test</original>
-        <encrypted>WHVW</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>193.1.209.100</ip>
-    </request>
-    <request>
-        <original>test</original>
-        <encrypted>WHVW</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>193.1.209.100</ip>
-    </request>
-    <request>
-        <original>attack from the north</original>
-        <encrypted>DWWDFN IURP WKH QRUWK</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>193.1.209.100</ip>
-    </request>
-    <request>
-        <original>this is a test</original>
-        <encrypted>WKLV LV D WHVW</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>46.7.214.153</ip>
-    </request>
-    <request>
-        <original>another test</original>
-        <encrypted>DQRWKHU WHVW</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>46.7.214.153</ip>
-    </request>
-    <request>
-        <original>testing</original>
-        <encrypted>WHVWLQJ</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>46.7.214.153</ip>
-    </request>
-    <request>
-        <original>testing</original>
-        <encrypted>WHVWLQJ</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>46.7.214.153</ip>
-    </request>
-    <request>
-        <original>testing</original>
-        <encrypted>WHVWLQJ</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>46.7.214.153</ip>
-    </request>
-    <request>
-        <original>testing again</original>
-        <encrypted>WHVWLQJ DJDLQ</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>46.7.214.153</ip>
-    </request>
-    <request>
-        <original>another test</original>
-        <encrypted>DQRWKHU WHVW</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>46.7.214.153</ip>
-    </request>
-    <request>
-        <original>hopefully it's working</original>
-        <encrypted>KRSHIXOOB LW'V ZRUNLQJ</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>46.7.214.153</ip>
-    </request>
-    <request>
-        <original>hopefully it's working</original>
-        <encrypted>KRSHIXOOB LW'V ZRUNLQJ</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>46.7.214.153</ip>
-    </request>
-    <request>
-        <original>test</original>
-        <encrypted>WHVW</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>46.7.214.153</ip>
-    </request>
-    <request>
-        <original>test</original>
-        <encrypted>WHVW</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>46.7.214.153</ip>
-    </request>
-    <request>
-        <original>this is a test again!</original>
-        <encrypted>WKLV LV D WHVW DJDLQ!</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>46.7.214.153</ip>
-    </request>
-    <request>
-        <original>this is a test again!</original>
-        <encrypted>WKLV LV D WHVW DJDLQ!</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>46.7.214.153</ip>
-    </request>
-    <request>
-        <original>this is a test again!</original>
-        <encrypted>WKLV LV D WHVW DJDLQ!</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>46.7.214.153</ip>
-    </request>
-    <request>
-        <original>this is a test again!</original>
-        <encrypted>WKLV LV D WHVW DJDLQ!</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>46.7.214.153</ip>
-    </request>
-    <request>
-        <original>this is a test again!</original>
-        <encrypted>WKLV LV D WHVW DJDLQ!</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>46.7.214.153</ip>
-    </request>
-    <request>
-        <original>this is a test again!</original>
-        <encrypted>WKLV LV D WHVW DJDLQ!</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>46.7.214.153</ip>
-    </request>
-    <request>
-        <original>this is a test again!</original>
-        <encrypted>WKLV LV D WHVW DJDLQ!</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>46.7.214.153</ip>
-    </request>
-    <request>
-        <original>this should also be appended to archive</original>
-        <encrypted>WKLV VKRXOG DOVR EH DSSHQGHG WR DUFKLYH</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>46.7.214.153</ip>
-    </request>
-    <request>
-        <original>please append</original>
-        <encrypted>SOHDVH DSSHQG</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>46.7.214.153</ip>
-    </request>
-    <request>
-        <original>appended?</original>
-        <encrypted>DSSHQGHG?</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>46.7.214.153</ip>
-    </request>
-    <request>
-        <original>anothero ne</original>
-        <encrypted>DQRWKHUR QH</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>46.7.214.153</ip>
-    </request>
-    <request>
-        <original>will this overwrite?</original>
-        <encrypted>ZLOO WKLV RYHUZULWH?</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>46.7.214.153</ip>
-    </request>
-    <request>
-        <original>will this overwrite?</original>
-        <encrypted>ZLOO WKLV RYHUZULWH?</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>46.7.214.153</ip>
-    </request>
-    <request>
-        <original>correct namespace?</original>
-        <encrypted>FRUUHFW QDPHVSDFH?</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>46.7.214.153</ip>
-    </request>
-    <request>
-        <original>namespace?</original>
-        <encrypted>QDPHVSDFH?</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>46.7.214.153</ip>
-    </request>
-    <request>
-        <original>updating xml namespaces</original>
-        <encrypted>XSGDWLQJ APO QDPHVSDFHV</encrypted>
-        <requested>11/26/2015 0:49:16</requested>
-        <ip>46.7.214.153</ip>
-    </request>
+<cc:requests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://cipher-natedrake13.c9users.io/ns/tns /home/ubuntu/workspace/xml/schema.xsd" xmlns="http://www.w3.org/1999/XSL/Transform" xmlns:cc="https://cipher-natedrake13.c9users.io/ns/tns">
+    <cc:request>
+        <cc:original>001</cc:original>
+        <cc:encrypted>001</cc:encrypted>
+        <cc:requested>2015/11/28 16:37:4</cc:requested>
+        <cc:ip>46.7.214.153</cc:ip>
+    </cc:request>
+    <cc:request>
+        <cc:original>002</cc:original>
+        <cc:encrypted>002</cc:encrypted>
+        <cc:requested>2015/11/28 16:39:43</cc:requested>
+        <cc:ip>46.7.214.153</cc:ip>
+    </cc:request>
+    <cc:request>
+        <cc:original>This is a test</cc:original>
+        <cc:encrypted>WKLV LV D WHVW</cc:encrypted>
+        <cc:requested>2015/12/5 10:10:14</cc:requested>
+        <cc:ip>193.1.209.100</cc:ip>
+    </cc:request>
+    <cc:request>
+        <cc:original>John greene is gay</cc:original>
+        <cc:encrypted>MRKQ JUHHQH LV JDB</cc:encrypted>
+        <cc:requested>2015/12/5 12:28:1</cc:requested>
+        <cc:ip>193.1.209.100</cc:ip>
+    </cc:request>
+    <cc:request>
+        <cc:original>this is a test</cc:original>
+        <cc:encrypted>MLALQFGMIKM</cc:encrypted>
+        <cc:requested>2015/12/5 15:20:13</cc:requested>
+        <cc:ip>193.1.209.100</cc:ip>
+    </cc:request>
+    <cc:request>
+        <cc:original>Nasir</cc:original>
+        <cc:encrypted>QDVLU</cc:encrypted>
+        <cc:requested>2015/12/5 16:21:44</cc:requested>
+        <cc:ip>193.1.209.100</cc:ip>
+    </cc:request>
+    <cc:request>
+        <cc:original>Nasir</cc:original>
+        <cc:encrypted>PALKR</cc:encrypted>
+        <cc:requested>2015/12/5 16:30:33</cc:requested>
+        <cc:ip>193.1.209.100</cc:ip>
+    </cc:request>
+    <cc:request>
+        <cc:original>Nasir</cc:original>
+        <cc:encrypted>QOYLF</cc:encrypted>
+        <cc:requested>2015/12/5 16:30:46</cc:requested>
+        <cc:ip>193.1.209.100</cc:ip>
+    </cc:request>
+    <cc:request>
+        <cc:original>testing</cc:original>
+        <cc:encrypted>WHVWLQJ</cc:encrypted>
+        <cc:requested>2015/12/5 19:1:22</cc:requested>
+        <cc:ip>46.7.214.153</cc:ip>
+    </cc:request>
+    <cc:request>
+        <cc:original>test</cc:original>
+        <cc:encrypted>WHVW</cc:encrypted>
+        <cc:requested>2015/12/5 19:11:7</cc:requested>
+        <cc:ip>46.7.214.153</cc:ip>
+    </cc:request>
+    <cc:request>
+        <cc:original>testing</cc:original>
+        <cc:encrypted>WHVWLQJ</cc:encrypted>
+        <cc:requested>2015/12/5 20:37:9</cc:requested>
+        <cc:ip>46.7.214.153</cc:ip>
+    </cc:request>
+    <cc:request>
+        <cc:original>test</cc:original>
+        <cc:encrypted>WHVW</cc:encrypted>
+        <cc:requested>2015/12/5 20:37:40</cc:requested>
+        <cc:ip>46.7.214.153</cc:ip>
+    </cc:request>
+    <cc:request>
+        <cc:original>tst</cc:original>
+        <cc:encrypted>WVW</cc:encrypted>
+        <cc:requested>2015/12/5 20:38:11</cc:requested>
+        <cc:ip>46.7.214.153</cc:ip>
+    </cc:request>
+    <cc:request>
+        <cc:original>test</cc:original>
+        <cc:encrypted>WHVW</cc:encrypted>
+        <cc:requested>2015/12/5 20:48:57</cc:requested>
+        <cc:ip>46.7.214.153</cc:ip>
+    </cc:request>
+    <cc:request>
+        <cc:original>this is another test</cc:original>
+        <cc:encrypted>WKLV LV DQRWKHU WHVW</cc:encrypted>
+        <cc:requested>2015/12/5 20:49:7</cc:requested>
+        <cc:ip>46.7.214.153</cc:ip>
+    </cc:request>
+    <cc:request>
+        <cc:original>the animation is awesome</cc:original>
+        <cc:encrypted>WKH DQLPDWLRQ LV DZHVRPH</cc:encrypted>
+        <cc:requested>2015/12/5 20:49:17</cc:requested>
+        <cc:ip>46.7.214.153</cc:ip>
+    </cc:request>
+    <cc:request>
+        <cc:original>test</cc:original>
+        <cc:encrypted>WHVW</cc:encrypted>
+        <cc:requested>2015/12/5 20:50:17</cc:requested>
+        <cc:ip>46.7.214.153</cc:ip>
+    </cc:request>
+    <cc:request>
+        <cc:original>this is a test</cc:original>
+        <cc:encrypted>WKLV LV D WHVW</cc:encrypted>
+        <cc:requested>2015/12/5 20:51:29</cc:requested>
+        <cc:ip>46.7.214.153</cc:ip>
+    </cc:request>
+    <cc:request>
+        <cc:original>this is a test</cc:original>
+        <cc:encrypted>WKLV LV D WHVW</cc:encrypted>
+        <cc:requested>2015/12/5 20:51:50</cc:requested>
+        <cc:ip>46.7.214.153</cc:ip>
+    </cc:request>
+    <cc:request>
+        <cc:original>this is a secret</cc:original>
+        <cc:encrypted>WKLV LV D VHFUHW</cc:encrypted>
+        <cc:requested>2015/12/5 20:51:59</cc:requested>
+        <cc:ip>46.7.214.153</cc:ip>
+    </cc:request>
+    <cc:request>
+        <cc:original>this is a secret</cc:original>
+        <cc:encrypted>WKLV LV D VHFUHW</cc:encrypted>
+        <cc:requested>2015/12/5 20:52:3</cc:requested>
+        <cc:ip>46.7.214.153</cc:ip>
+    </cc:request>
+    <cc:request>
+        <cc:original>this is a secret</cc:original>
+        <cc:encrypted>WKLV LV D VHFUHW</cc:encrypted>
+        <cc:requested>2015/12/5 20:52:6</cc:requested>
+        <cc:ip>46.7.214.153</cc:ip>
+    </cc:request>
+    <cc:request>
+        <cc:original>this is a secret</cc:original>
+        <cc:encrypted>WKLV LV D VHFUHW</cc:encrypted>
+        <cc:requested>2015/12/5 20:52:11</cc:requested>
+        <cc:ip>46.7.214.153</cc:ip>
+    </cc:request>
+    <cc:request>
+        <cc:original>this is a secret</cc:original>
+        <cc:encrypted>WKLV LV D VHFUHW</cc:encrypted>
+        <cc:requested>2015/12/5 20:52:14</cc:requested>
+        <cc:ip>46.7.214.153</cc:ip>
+    </cc:request>
+    <cc:request>
+        <cc:original>attack from the north</cc:original>
+        <cc:encrypted>DWWDFN IURP WKH QRUWK</cc:encrypted>
+        <cc:requested>2015/12/5 20:52:42</cc:requested>
+        <cc:ip>46.7.214.153</cc:ip>
+    </cc:request>
+    <cc:request>
+        <cc:original>troops moving from the south. BEWARE!</cc:original>
+        <cc:encrypted>WURRSV PRYLQJ IURP WKH VRXWK. EHZDUH!</cc:encrypted>
+        <cc:requested>2015/12/5 20:53:1</cc:requested>
+        <cc:ip>46.7.214.153</cc:ip>
+    </cc:request>
+    <cc:request>
+        <cc:original>this is a test</cc:original>
+        <cc:encrypted>WKLV LV D WHVW</cc:encrypted>
+        <cc:requested>2015/12/5 20:55:36</cc:requested>
+        <cc:ip>46.7.214.153</cc:ip>
+    </cc:request>
+    <cc:request>
+        <cc:original>this is a test</cc:original>
+        <cc:encrypted>WKLV LV D WHVW</cc:encrypted>
+        <cc:requested>2015/12/5 21:28:44</cc:requested>
+        <cc:ip>46.7.214.153</cc:ip>
+    </cc:request>
+    <cc:request>
+        <cc:original>test</cc:original>
+        <cc:encrypted>WHVW</cc:encrypted>
+        <cc:requested>2015/12/5 21:44:17</cc:requested>
+        <cc:ip>46.7.214.153</cc:ip>
+    </cc:request>
+    <cc:request>
+        <cc:original>test</cc:original>
+        <cc:encrypted>WHVW</cc:encrypted>
+        <cc:requested>2015/12/5 22:26:52</cc:requested>
+        <cc:ip>46.7.214.153</cc:ip>
+    </cc:request>
 </cc:requests>
