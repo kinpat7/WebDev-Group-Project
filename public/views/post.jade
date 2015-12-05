@@ -20,7 +20,7 @@ block content
                     form#comment-form
                         .form-group
                             input(type='hidden', name='postid' id='postid' value="#{post.id}")
-                            textarea.form-control.comment-box(placeholder="Leave a comment", name='body')
+                            textarea.form-control.comment-box#comment-body(placeholder="Leave a comment", name='body', required='required')
                         button.btn.btn-success(type='submit', id='submit-comment', name='comment') Comment
                     .comments
                         h3 User comments
