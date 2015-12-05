@@ -58,7 +58,7 @@ app.get('/blog', function(request, response) {
         title: String,
         description: String
     });
-    post.find({id: orm.gte(1)}, 5, function(error, posts) {
+    post.find({}, ["id", "Z"], function(error, posts) {
         response.render('blog', {posts: posts});
     });
 });
@@ -143,7 +143,7 @@ app.post('/enc', function(request, response) {
             encryptedText = cipher.caesar();
             break;
         case 'vig':
-            encryptedText = cipher.vigenere(request.body.cipherkey)
+            encryptedText = cipher.vigenere(request.body.cipherkey);
             break;
         default:
             break;
@@ -177,23 +177,35 @@ app.post('/enc', function(request, response) {
                      *      SQL is returning date as Wed, 5 Nov 2015 16:51:12 GMT +0000 (UTC)
                      *      using datehelper and Date.parse method we can return dd/mm/yyyy hh:ii:ss
                     **/
-                    var d = new DateHelper(Date.parse(results[key].requested));
-                    
+                    var epoch = (Date.parse(results[key].requested));
+                    var date = new DateHelper(new Date(epoch));
                     xmlWriter.startElement('cc:request');
-                    xmlWriter.writeElement('original', results[key].original);
-                    xmlWriter.writeElement('encrypted', results[key].encrypted);
-                    xmlWriter.writeElement('requested', d.getCurrentBigEndian());
-                    xmlWriter.writeElement('ip', results[key].ip);
+                    xmlWriter.writeElement('cc:original', results[key].original);
+                    xmlWriter.writeElement('cc:encrypted', results[key].encrypted);
+                    xmlWriter.writeElement('cc:requested', date.datetime());
+                    xmlWriter.writeElement('cc:ip', results[key].ip);
                     xmlWriter.endElement();  /** close the request element **/
                 }
                 /** close the root element {requests} **/
                 xmlWriter.endElement();
                 /** end the xml document **/
                 xmlWriter.endDocument();
-                /** use r+ flag to overwrite previous xml file so as not to append redundant data **/
-                fs.writeFile(__dirname+'/xml/requests.xml', xmlWriter.toString(), {flags: 'r+'}, function(error) {
-                    if (error) { throw error; }
-                });
+                /** check if the requests.xml file exists **/
+                fs.exists(__dirname+'/xml/requests.xml', function(exists) {
+                    if (exists) {
+                        fs.unlink(__dirname+'/xml/requests.xml', function(error){
+                            if (error) { throw error; }
+                            fs.writeFile(__dirname+'/xml/requests.xml', xmlWriter.toString(), function(error) {
+                                if (error) { throw error; }
+                            });
+                        });
+                    } else {
+                        fs.writeFile(__dirname+'/xml/requests.xml', xmlWriter.toString(), function(error) {
+                            if (error) { throw error; }
+                        });
+                    }
+                    
+                })
             });
         });
         response.send(encryptedText);
@@ -203,6 +215,7 @@ app.post('/enc', function(request, response) {
 });
 
 app.post('/requests', function(request, response) {
+    /** define our request entry model **/
     var entry = ormdb.define('requests', {
         id: Number,
         original: String,
@@ -210,18 +223,31 @@ app.post('/requests', function(request, response) {
         requested: Date,
         ip: String
     });
+    /** search the requests relation for any row with an ip attribute that matches the users ip address **/
     entry.find({ip: getIP(request)}, 5, ["id", "Z"], function(error, results) {
+        /** always safe to check for errors **/
         if (!error) {
-            var requests = {requests:[]};
-            for(var key in results) {
-                requests.requests.push({
-                    request: ((results[key]))
-                });
+            /** check if the user has ever made a request using their current ip address **/
+            if (!results.length) {
+                /** no results, return message to user **/
+                response.send('<div class="empty-table">No recent requests. Please submit a request!</div>');
+            } else {
+                /** there are some results from the table **/
+                var requests = {requests:[]};
+                for(var key in results) {
+                    /** iterate through each request and add it to our json string **/
+                    requests.requests.push({
+                        request: ((results[key]))
+                    });
+                }
+                /** conver the xml to json and parse the xml using nodexslt **/
+                var xml = nodexslt.readXmlString(json2xml(requests));
+                /** parse the xsl code for transformation **/
+                var xslt = nodexslt.readXsltFile('./xml/style.xsl');
+                /** send the transformed code using the xml and xsl code above **/
+                response.send(nodexslt.transform(xslt, xml, []));
             }
         }
-        var xml = nodexslt.readXmlString(json2xml(requests));
-        var xslt = nodexslt.readXsltFile('./xml/style.xsl');
-        response.send(nodexslt.transform(xslt, xml, []));
     });
 });
 
