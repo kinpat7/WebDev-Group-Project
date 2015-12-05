@@ -80,5 +80,21 @@ input {
 }
 
 #requests {
+    position: relative;
     padding : 0 1.2em;
+}
+
+.empty-table {
+    padding : 3em;
+    text-align: center;
+    font-size: 1.3em;
+}
+.table-fade {
+    opacity : 0.5;
+}
+
+.span-center-big {
+    position: absolute;
+    font-size: 5em;
+    margin : 20%  40%;
 }

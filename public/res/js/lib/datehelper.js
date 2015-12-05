@@ -30,7 +30,6 @@ var months = [
 
 var DateHelper = function(date) {
     this.dateObj = date;
-
     this.getdate = function() {
         this.date = this.dateObj.getDate();
         this.day = this.dateObj.getDay();
