@@ -207,3 +207,11 @@ function finishAnimation(callback) {
          return null;
      }
  }
+ 
+ 
+ /**
+  * @TODO
+  *     after submitting comment using ajax we need to update 
+  *         the comments on that page using ajax without having 
+  *         to refresh the page
+  **/
