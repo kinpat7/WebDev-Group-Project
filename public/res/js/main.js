@@ -38,9 +38,13 @@ $(function(){
             //$('#encrypt-btn').attr('data-toggle', 'popover').attr('data-content', data).attr('data-trigger', 'focus').attr('role', 'button');
             $('#encrypt-btn').popover('show');
             updatePreviousRequests();
+            $('#input-text').val('');
         });
     });
     
+    /**
+     * event called when user changes item in dropdown list
+     **/
     $('#input-select').on('change', function(event) {
         var selectedCipher = $('#input-select option:selected').val();
         if ($('.keywrapper').length > 0) {
@@ -62,15 +66,12 @@ $(function(){
         }
     });
     
-    
     /**
      *  load previous requests
-     *
      */
     $('#requests').ready(function(event) {
         updatePreviousRequests();
     });
-    
 });
 
 /**
@@ -78,11 +79,18 @@ $(function(){
  */
 function updatePreviousRequests() {
     $.post('/requests', '', function(data) {
-        console.log('creating animation schema');
         createAnimationSchema($('#requests'));
         setTimeout(function() {
             finishAnimation(function() {
                 $('#requests').html(data);
+                $('.request-entry').each(function(index) {
+                    var id = parseInt(($(this).children(0).html()));
+                    $(this).dblclick(function(event) {
+                        event.preventDefault();
+                        removeRequest(id);
+                        
+                    })
+                })
             });
         }, 2000);
     });
@@ -110,6 +118,10 @@ function addCipherKeyInput() {
     $('#input-select').parent().prev().after(cipherKeyInput);
 }
 
+/**
+ *  @param element
+ *  @note adds all elements neccessary to perform animation
+ **/
 function createAnimationSchema(element) {
     var html = $('<span class="glyphicon glyphicon-cog span-center-big" id="spinner"></span>');
     element.addClass('table-fade');
@@ -117,6 +129,11 @@ function createAnimationSchema(element) {
     (performScalingAnimation(html));
 }
 
+/**
+ *  @param element
+ *  @ note function that actually performs the scaling 
+ *      on the element supplied
+ **/
 function scaleElement(element) {
     var defaultFontSize = parseCssProperty(element.css('font-size'));
     var defaultOpacity = element.css('opacity');
@@ -131,16 +148,23 @@ function scaleElement(element) {
         element.animate({
             fontSize: defaultFontSize+"px",
             opacity: defaultOpacity
-        }, 750, function() {
-            console.log('done animation cycle');
-        }); // scale back to normal
+        }, 750, function() {}); // scale back to normal
     }); // scale bigger
 }
 
+/**
+ *  Perform animation to scale an element up and back to its default scale
+ **/
 function performScalingAnimation(element) {
     animationTimer = setInterval(scaleElement(element), 1550);
 }
 
+/**
+ *  @param callback function
+ *      call back function to call once animation actually stops
+ *  @note function to clear interval that keeps the animation running
+ *      removes elements used in animation from the DOM
+ **/
 function finishAnimation(callback) {
     $('#spinner').remove();
     $('#requests').removeClass('table-fade');
@@ -149,6 +173,17 @@ function finishAnimation(callback) {
         callback();
     }
 }
+
+/**
+ *  function to remove request from recent requests
+ **/
+ 
+ function removeRequest(id) {
+     $.post('/removerequest/'+id, '', function(data) {
+         console.log(data);
+         updatePreviousRequests();
+     });
+ }
 
 /** 
  * DRY code

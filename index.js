@@ -187,59 +187,7 @@ app.post('/enc', function(request, response) {
             ip: getIP(request)
         }, function(err, results) {
             if (err) { throw err; }
-            entry.find({}, function(error, results) {
-                /**
-                 * update our xml archive 
-                 **/
-                xmlWriter.startDocument();
-                xmlWriter.startElement('cc:requests');
-                /** 
-                 * write namespace and schema definitions 
-                 **/
-                xmlWriter
-                    .writeAttribute('xmlns:xsi','http://www.w3.org/2001/XMLSchema-instance')
-                    .writeAttribute('xsi:schemaLocation', 'https://cipher-natedrake13.c9users.io/ns/tns '+__dirname+'/xml/schema.xsd')
-                    .writeAttribute('xmlns', 'http://www.w3.org/1999/XSL/Transform')
-                    .writeAttribute('xmlns:cc', 'https://cipher-natedrake13.c9users.io/ns/tns');
-                    
-                if (error)  { throw error; }
-                for(var key in results) {
-                    
-                    /** 
-                     * create a datehelper object form UTC string passed from sql server 
-                     *      SQL is returning date as Wed, 5 Nov 2015 16:51:12 GMT +0000 (UTC)
-                     *      using datehelper and Date.parse method we can return dd/mm/yyyy hh:ii:ss
-                    **/
-                    var epoch = (Date.parse(results[key].requested));
-                    var date = new DateHelper(new Date(epoch));
-                    xmlWriter.startElement('cc:request');
-                    xmlWriter.writeElement('cc:original', results[key].original);
-                    xmlWriter.writeElement('cc:encrypted', results[key].encrypted);
-                    xmlWriter.writeElement('cc:requested', date.datetime());
-                    xmlWriter.writeElement('cc:ip', results[key].ip);
-                    xmlWriter.endElement();  /** close the request element **/
-                }
-                /**
-                 * close the root element {requests} 
-                 **/
-                xmlWriter.endElement();
-                /**
-                 * end the xml document 
-                 **/
-                xmlWriter.endDocument();
-                /**
-                * check if the requests.xml file exists 
-                **/
-                fs.exists(__dirname+'/xml/requests.xml', function(exists) {
-                    if (exists) {
-                        var writeStream = fs.createWriteStream(__dirname+'/xml/requests.xml');
-                        writeStream.write(xmlWriter.toString(), 'UTF-8', function(error) {
-                           if (error)  { throw error; }
-                           xmlWriter = new XMLWriter(true);
-                        });
-                    }
-                });
-            });
+            updateXML();
         });
         /**
          * send xhtml back to the user
@@ -249,6 +197,31 @@ app.post('/enc', function(request, response) {
         /**
          * No data submitted to the server
          **/
+        response.send('No data submitted, please try again.');
+    }
+});
+
+app.post('/removerequest/:id', function(request, response) {
+    /**
+        Define the model of our encryption request object 
+     **/
+    var entry = ormdb.define('requests', {
+        id: Number,
+        original: String,
+        encrypted: String,
+        requested: Date,
+        ip: String
+    });
+    /**
+     * make sure the id of the post is submitted
+     **/
+    if (request.params.id) {
+        response.send(request.params.id);
+        entry.find({id: request.params.id}).remove(function(error) {
+            if (error) { throw error; }
+            updateXML();
+        });
+    } else {
         response.send('No data submitted, please try again.');
     }
 });
@@ -352,6 +325,74 @@ app.post('/comment', function(request, response) {
         }
     }
 });
+
+function updateXML() {
+    /**
+     * model of our requests table
+     **/
+    var entry = ormdb.define('requests', {
+        id: Number,
+        original: String,
+        encrypted: String,
+        requested: Date,
+        ip: String
+    });
+    
+    entry.find({}, function(error, results) {
+        /**
+         * update our xml archive 
+         **/
+        xmlWriter.startDocument();
+        xmlWriter.startElement('cc:requests');
+        /** 
+         * write namespace and schema definitions 
+         **/
+        xmlWriter
+            .writeAttribute('xmlns:xsi','http://www.w3.org/2001/XMLSchema-instance')
+            .writeAttribute('xsi:schemaLocation', 'https://cipher-natedrake13.c9users.io/ns/tns '+__dirname+'/xml/schema.xsd')
+            .writeAttribute('xmlns', 'http://www.w3.org/1999/XSL/Transform')
+            .writeAttribute('xmlns:cc', 'https://cipher-natedrake13.c9users.io/ns/tns');
+            
+        if (error)  { throw error; }
+        for(var key in results) {
+            
+            /** 
+             * create a datehelper object form UTC string passed from sql server 
+             *      SQL is returning date as Wed, 5 Nov 2015 16:51:12 GMT +0000 (UTC)
+             *      using datehelper and Date.parse method we can return dd/mm/yyyy hh:ii:ss
+            **/
+            var epoch = (Date.parse(results[key].requested));
+            var date = new DateHelper(new Date(epoch));
+            xmlWriter.startElement('cc:request');
+            xmlWriter.writeElement('cc:id', results[key].id);
+            xmlWriter.writeElement('cc:original', results[key].original);
+            xmlWriter.writeElement('cc:encrypted', results[key].encrypted);
+            xmlWriter.writeElement('cc:requested', date.datetime());
+            xmlWriter.writeElement('cc:ip', results[key].ip);
+            xmlWriter.endElement();  /** close the request element **/
+        }
+        /**
+         * close the root element {requests} 
+         **/
+        xmlWriter.endElement();
+        /**
+         * end the xml document 
+         **/
+        xmlWriter.endDocument();
+        /**
+        * check if the requests.xml file exists 
+        **/
+        fs.exists(__dirname+'/xml/requests.xml', function(exists) {
+            if (exists) {
+                var writeStream = fs.createWriteStream(__dirname+'/xml/requests.xml');
+                writeStream.write(xmlWriter.toString(), 'UTF-8', function(error) {
+                   if (error)  { throw error; }
+                   xmlWriter = new XMLWriter(true);
+                });
+            }
+        });
+    });
+}
 
 /**
  * start an instance of the app/server 

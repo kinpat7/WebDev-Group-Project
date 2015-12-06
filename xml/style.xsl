@@ -23,7 +23,10 @@
             </thead>
             <xsl:for-each select="request">
                     <tr>
-                        <td><xsl:value-of select="encrypted" /></td>
+                        <td class="request-entry" title="double click to delete">
+                            <span class="hidden" id="request-id"><xsl:value-of select="id"/></span>
+                            <xsl:value-of select="encrypted" />
+                        </td>
                     </tr>
             </xsl:for-each>
         </table>

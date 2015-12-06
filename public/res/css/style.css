@@ -104,3 +104,12 @@ input {
     font-family: 'Roboto', 'Arial', Sans-serif;
     text-align: center;
 }
+
+.request-entry:hover {
+    color : #C7254E;
+    cursor : pointer;
+    -moz-user-select: none; 
+    -webkit-user-select: none; 
+    -ms-user-select:none; 
+    user-select:none;
+}
