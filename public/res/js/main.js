@@ -85,6 +85,14 @@ function updatePreviousRequests() {
                 $('#requests').html(data);
                 $('.request-entry').each(function(index) {
                     var id = parseInt(($(this).children(0).html()));
+                    $(this).on('mouseenter', function(event) {
+                        event.preventDefault();
+                        $(this).fadeTo(1000, 0.5);
+                    });
+                    $(this).on('mouseleave', function(event) {
+                        event.preventDefault();
+                        $(this).fadeTo(1000, 1.0);
+                    });
                     $(this).dblclick(function(event) {
                         event.preventDefault();
                         removeRequest(id);
