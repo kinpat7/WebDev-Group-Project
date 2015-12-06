@@ -1,9 +1,9 @@
 /**
  *  index.js
- *  @author John O'Grady
+ *  @author John O'Grady <natedrake> | 14101718
  *  @date 10/11/2015
  *  @note index javascript file... handles routing, server responses/requests,
-  *     orm, rss generation, ciphering, parsing url
+  *     orm, rss generation, ciphering, parsing url, xml generation
  */
 var fs = require("fs");
 var express = require('express');
@@ -14,7 +14,8 @@ var orm = require('orm');
 var json2xml = require('json2xml');
 var nodexslt = require("node_xslt");
 var striptags = require('striptags');
-var XMLWriter = require("xml-writer")
+var XMLWriter = require("xml-writer");
+
 /**
  * custom packages
  */
@@ -28,24 +29,36 @@ var xmlCleaner = new XMLCleaner();
 var dateHelper;
 var xmlWriter = new XMLWriter(true);    /** true param if xml to be indented **/
 
-/** for calling js, and css files, etc... **/
+/**
+ * for calling js, and css files, etc... 
+ **/
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/xml'));
 app.set('views', __dirname + '/public/views');
 app.set('view engine', 'jade');
 
-/** Connect to our postgresql DB **/
+/** 
+ * Connect to our postgresql DB 
+ **/
 orm.connect('mysql://natedrake13:@localhost/c9', function(err, db) {
     if (err) { throw err; }
     ormdb = db;
 });
-/** for parsing query string in url **/
+/**
+ * for parsing query string in url 
+ **/
 app.use(bodyParser.urlencoded({extended: false}));
 
+
 /**
+ * 
  * routes...
+ * 
 **/
-/** Get Requests **/
+
+/**
+ * Get Requests 
+ **/
 app.get('/', function(request, response) {
     response.render('index');
 });
@@ -91,7 +104,8 @@ app.get('/blog/:id', function(request, response) {
     });
 });
 /**
- * server our generated rss feeds. each item in the rss feed is generated from our blog posts in the DB
+ * serve our generated rss feeds. each item in the rss feed 
+ *      is generated from our blog posts in the DB
  */
 app.get('/rss', function(request, response) {
     var feed = new Feed({
@@ -105,7 +119,10 @@ app.get('/rss', function(request, response) {
         title: String,
         description: String
     });
-    post.find({id: orm.gte(1)}, 5, function(error, posts) {
+    /**
+     * get all posts in our blog
+     **/
+    post.find({id: orm.gte(1)}, function(error, posts) {
         for(var key in posts) {
             feed.addItem({
                 title: posts[key].title,
@@ -118,14 +135,21 @@ app.get('/rss', function(request, response) {
     });
 });
 
+/**
+ *  view archive of all requests ever made
+ **/
 app.get('/archive', function(request, response) {
     var xml = nodexslt.readXmlFile(__dirname+'/xml/requests.xml');
     var xslt = nodexslt.readXsltFile(__dirname+'/xml/style.xsl');
     response.send(nodexslt.transform(xslt, xml, []));
 });
-/** Post Requests **/
+/**
+* Post Requests 
+**/
 app.post('/enc', function(request, response) {
-    /** Define the model of our encryption request object **/
+    /**
+        Define the model of our encryption request object 
+     **/
     var entry = ormdb.define('requests', {
         id: Number,
         original: String,
@@ -133,10 +157,14 @@ app.post('/enc', function(request, response) {
         requested: Date,
         ip: String
     });
-    /** Create the cipher object, used to encrypt the submitted text **/
+    /**
+     * Create the cipher object, used to encrypt the submitted text 
+     **/
     var cipher = new Cipher(request.body.inputtext);
     var encryptedText = '';
-    /** check which cipher was selected in request **/
+    /**
+     * check which cipher was selected in request 
+     **/
     switch(request.body.cipherinput) {
         case 'cae':
             cipher.setOffset(3);
@@ -148,7 +176,9 @@ app.post('/enc', function(request, response) {
         default:
             break;
     }
-    /** make sure the user has submitted data **/
+    /**
+     * make sure the user has submitted data
+     **/
     if (request.body.inputtext.length > 1) {
         entry.create({
             original: request.body.inputtext,
@@ -163,12 +193,15 @@ app.post('/enc', function(request, response) {
                  **/
                 xmlWriter.startDocument();
                 xmlWriter.startElement('cc:requests');
-                /** write namespace and schema definitions **/
+                /** 
+                 * write namespace and schema definitions 
+                 **/
                 xmlWriter
                     .writeAttribute('xmlns:xsi','http://www.w3.org/2001/XMLSchema-instance')
                     .writeAttribute('xsi:schemaLocation', 'https://cipher-natedrake13.c9users.io/ns/tns '+__dirname+'/xml/schema.xsd')
                     .writeAttribute('xmlns', 'http://www.w3.org/1999/XSL/Transform')
                     .writeAttribute('xmlns:cc', 'https://cipher-natedrake13.c9users.io/ns/tns');
+                    
                 if (error)  { throw error; }
                 for(var key in results) {
                     
@@ -186,36 +219,47 @@ app.post('/enc', function(request, response) {
                     xmlWriter.writeElement('cc:ip', results[key].ip);
                     xmlWriter.endElement();  /** close the request element **/
                 }
-                /** close the root element {requests} **/
+                /**
+                 * close the root element {requests} 
+                 **/
                 xmlWriter.endElement();
-                /** end the xml document **/
+                /**
+                 * end the xml document 
+                 **/
                 xmlWriter.endDocument();
-                /** check if the requests.xml file exists **/
+                /**
+                * check if the requests.xml file exists 
+                **/
                 fs.exists(__dirname+'/xml/requests.xml', function(exists) {
                     if (exists) {
-                        fs.unlink(__dirname+'/xml/requests.xml', function(error){
-                            if (error) { throw error; }
-                            fs.writeFile(__dirname+'/xml/requests.xml', xmlWriter.toString(), function(error) {
-                                if (error) { throw error; }
-                            });
-                        });
-                    } else {
-                        fs.writeFile(__dirname+'/xml/requests.xml', xmlWriter.toString(), function(error) {
-                            if (error) { throw error; }
+                        var writeStream = fs.createWriteStream(__dirname+'/xml/requests.xml');
+                        writeStream.write(xmlWriter.toString(), 'UTF-8', function(error) {
+                           if (error)  { throw error; }
+                           xmlWriter = new XMLWriter(true);
                         });
                     }
-                    
-                })
+                });
             });
         });
+        /**
+         * send xhtml back to the user
+         **/
         response.send(encryptedText);
     } else {
+        /**
+         * No data submitted to the server
+         **/
         response.send('No data submitted, please try again.');
     }
 });
 
+/**
+ *  ajax requests for previous requests from user
+ **/
 app.post('/requests', function(request, response) {
-    /** define our request entry model **/
+    /**
+     * define our request entry model 
+     **/
     var entry = ormdb.define('requests', {
         id: Number,
         original: String,
@@ -223,36 +267,60 @@ app.post('/requests', function(request, response) {
         requested: Date,
         ip: String
     });
-    /** search the requests relation for any row with an ip attribute that matches the users ip address **/
+    /**
+     * search the requests relation for any row with an 
+     *      ip attribute that matches the users ip address 
+     **/
     entry.find({ip: getIP(request)}, 5, ["id", "Z"], function(error, results) {
-        /** always safe to check for errors **/
+        /**
+         * always safe to check for errors 
+         **/
         if (!error) {
-            /** check if the user has ever made a request using their current ip address **/
+            /**
+             * check if the user has ever made a request using their current ip address 
+             **/
             if (!results.length) {
-                /** no results, return message to user **/
+                /** 
+                 * no results, return message to user 
+                 **/
                 response.send('<div class="empty-table">No recent requests. Please submit a request!</div>');
             } else {
-                /** there are some results from the table **/
+                /** 
+                 * there are some results from the table 
+                 **/
                 var requests = {requests:[]};
                 for(var key in results) {
-                    /** iterate through each request and add it to our json string **/
+                    /** 
+                     * iterate through each request and add it to our json string 
+                     **/
                     requests.requests.push({
                         request: ((results[key]))
                     });
                 }
-                /** conver the xml to json and parse the xml using nodexslt **/
+                /** 
+                 * convert the xml to json and parse the xml using nodexslt 
+                 **/
                 var xml = nodexslt.readXmlString(json2xml(requests));
-                /** parse the xsl code for transformation **/
+                /**
+                 * parse the xsl code for transformation 
+                 **/
                 var xslt = nodexslt.readXsltFile('./xml/style.xsl');
-                /** send the transformed code using the xml and xsl code above **/
+                /** 
+                 * send the transformed code using the xml and xsl code above 
+                 **/
                 response.send(nodexslt.transform(xslt, xml, []));
             }
         }
     });
 });
 
-
+/**
+ * ajax request to submit comment on blog post 
+ **/
 app.post('/comment', function(request, response) {
+    /**
+     * create a model of our comments relation
+     **/
     var comment = ormdb.define('comments', {
        id: Number,
        body: String,
@@ -260,27 +328,43 @@ app.post('/comment', function(request, response) {
        post: Number,
        comment: Number
     });
-   if (typeof(request.body.comment) !== undefined) {
-       if (request.body.body.length >= 1 ) {
-           comment.create({ 
-               body: striptags(request.body.body), 
-               posted: new Date(), 
-               post: striptags(request.body.postid)
+    /**
+     * check if the comment body is submitted
+     **/
+    if (typeof(request.body.comment) !== undefined) {
+        /** 
+         * make sure the comment body contains content
+         **/
+        if (request.body.body.length >= 1 ) {
+            /**
+             * add the comment to the database
+             **/
+            comment.create({ 
+                body: striptags(request.body.body), 
+                posted: new Date(), 
+                post: striptags(request.body.postid)
             }, function(err, results) {
-               if (err) { throw err; }
+                /**
+                 * throw any errors with the insert
+                 **/
+                if (err) { throw err; }
             });
-       }
-   }
+        }
+    }
 });
 
-/** start an instance of the app/server **/
+/**
+ * start an instance of the app/server 
+ **/
 var server = app.listen((process.env.PORT || 8080), function () {
     var hostname = server.address().address;
     var port = server.address().port;
     console.log('App listening at http://%s:%s', hostname, port);
 });
 
-
+/**
+ * gets ip address of remote user
+ **/
 function getIP(request) {
     var ip = (request.headers['x-forwarded-for'] || request.connection.remoteAddress)
     return xmlCleaner.cleanRemoteAddress(ip);
