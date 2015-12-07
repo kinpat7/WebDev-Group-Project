@@ -14,11 +14,4 @@
         <cc:requested>2015/12/7 18:11:28</cc:requested>
         <cc:ip>92.251.255.12</cc:ip>
     </cc:request>
-    <cc:request>
-        <cc:id>212</cc:id>
-        <cc:original>PatrickandJohn</cc:original>
-        <cc:encrypted>SDWULFNDQGMRKQ</cc:encrypted>
-        <cc:requested>2015/12/7 19:12:46</cc:requested>
-        <cc:ip>193.1.209.100</cc:ip>
-    </cc:request>
 </cc:requests>

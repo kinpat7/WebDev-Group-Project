@@ -179,7 +179,7 @@ app.post('/enc', function(request, response) {
     /**
      * make sure the user has submitted data
      **/
-    if (request.body.inputtext.length > 1) {
+    if (request.body.inputtext.length >= 1) {
         entry.create({
             original: request.body.inputtext,
             encrypted: encryptedText,
