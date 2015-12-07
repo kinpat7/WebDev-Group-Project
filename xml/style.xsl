@@ -18,7 +18,7 @@
             <thead>
                 <hr />
                 <tr>
-                    <th>Encoded Message</th>
+                    <th>Encoded Message <small>( Double Click to Delete )</small></th>
                 </tr>
             </thead>
             <xsl:for-each select="request">
