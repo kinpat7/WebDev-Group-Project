@@ -92,6 +92,18 @@ $(function(){
     });
     
     /**
+     * Adding a hover over function to the Encrypt button
+     * changes colour
+     */
+    var currentColor;
+    $("#encrypt-btn").hover(function(){
+        currentColor = $('#encrypt-btn').css('background-color');
+        $(this).css("background-color", "green");
+    }, function(){
+        $(this).css("background-color", currentColor);
+    });
+    
+    /**
      *  @note submit a comment to a post
      */
     $('#submit-comment').on('click', function(event) {
