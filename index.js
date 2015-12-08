@@ -291,6 +291,7 @@ app.post('/removerequest/:id', function(request, response) {
              *  @note re-write our historical XML data
              **/
             updateXML();
+            response.send('200');
         });
     } else {
         /**

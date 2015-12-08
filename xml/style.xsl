@@ -35,6 +35,7 @@
     <xsl:template match="cc:requests">
         <html>
             <head>
+                <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
                 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
                 <link rel="stylesheet" href="../res/css/style.css"/>
                 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -42,10 +43,10 @@
             </head>
             <body>
                 <div class="row">
-                    <div class="col-sm-2 col-xs-1"></div>
-                    <div class="col-sm-8 col-xs-10">
+                    <div class="col-sm-2 col-xs-0"></div>
+                    <div class="col-sm-8 col-xs-12">
                         <div class="table-responsive">
-                            <table class="table table-striped table-bordered ">
+                            <table class="table table-striped table-bordered">
                                 <thead>
                                     <h4>Archive of requests</h4>
                                     <hr />
@@ -63,7 +64,7 @@
                             </table>
                         </div>
                     </div>
-                    <div class="col-sm-2 col-xs-1"></div>
+                    <div class="col-sm-2 col-xs-0"></div>
                 </div>
             </body>
         </html>
