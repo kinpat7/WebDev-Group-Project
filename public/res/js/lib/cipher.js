@@ -62,34 +62,34 @@ alphabetArray["z"] = 25;
 function caesar() {
     var enc = '';
     /**
-     *  check if an offset has been applied
+     *  @note check if an offset has been applied
      **/
     if (typeof(this.offset) === undefined) {
         this.offset = 3;
     }
     /**
-     *  iterate through each char in our string
+     *  @note iterate through each char in our string
      **/
     for(var i = 0; i < this.string.length; i++ ) {
         /**
-         * Caesar cipher will allow spaces and symbols, other cipher will remove all 
+         *  @note Caesar cipher will allow spaces and symbols, other cipher will remove all 
          **/
         if (this.string.charAt(i).match(/\s|\d|[^a-zA-Z]/)) {
             /**
-             *  append allowed characters 
+             *  @note append allowed characters 
              **/
             enc += this.string.charAt(i);
             /**
-             * finish current iteration of the loop 
+             *  @note finish current iteration of the loop 
              **/
             continue;
         }
         /**
-         * get the integer value for the position of the current letter 
+         *  @note get the integer value for the position of the current letter 
          **/
         var iLetter = parseInt(alphabetArray[this.string.charAt(i).toLowerCase()]);
         /**
-         * append the encrypted letter to the encrypted phrase 
+         *  @note append the encrypted letter to the encrypted phrase 
          **/
         enc += alphabetCapital[((iLetter+this.offset)%alphabet.length)];
     }
@@ -97,9 +97,9 @@ function caesar() {
 }
 
 /**
- * @param string
- * @returns {string}
- * @note formula for vigenere cipher
+ *  @param string
+ *  @returns {string}
+ *  @note formula for vigenere cipher
  *      E=(M[i] + K[i]) % 26
  *      D=(M[i] - K[i]) % 26
  *      where: M[i] = i-th character of input text,
@@ -108,29 +108,29 @@ function caesar() {
 function vigenere(key) {
     var enc = '';
     /**
-     * replace all non digits or letter for better security 
+     *  @note replace all non digits or letter for better security 
      **/
     this.string = this.string.replace(/\s|\d|[^a-zA-Z]/g, '');
     for(var i = 0; i < this.string.length; i++) {
         /** 
-         * integer of each letters position in alphabet, e.g. a=0, b=1, .., z=25 
+         *  @note integer of each letters position in alphabet, e.g. a=0, b=1, .., z=25 
          **/
         var iLetter = parseInt(alphabetArray[this.string.charAt(i).toLowerCase()]);
         /**
-         * corresponding key letter 
+         *  @note corresponding key letter 
          **/
         var sKey = key.charAt(i % key.length).toLowerCase();
         /**
-         * get the integer value of key letter 
+         *  @note get the integer value of key letter 
          **/
         var iKey = parseInt(alphabetArray[sKey]);
         /** 
-         * append the encrypted letter to the encrypted phrase
+         *  @note append the encrypted letter to the encrypted phrase
          **/
         enc += (alphabetCapital[((iLetter + iKey)%alphabet.length)]);
     }
     /**
-     *  return the encrypted phrase
+     *  @note return the encrypted phrase
      **/
     return enc;
 }
