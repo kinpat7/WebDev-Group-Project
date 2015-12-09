@@ -177,7 +177,7 @@ app.get('/rss', function(request, response) {
         /**
          *  @note set appropriate headers and send the RSS xml data
          **/
-        response.set('Content-Type', 'application/rss+xml');
+         response.set('Content-Type', 'application/rss+xml');
         response.send(xmlCleaner.cleanRSS(feed.render('rss-2.0')));
     });
 });
@@ -221,7 +221,7 @@ app.post('/enc', function(request, response) {
     /**
      *  @note Create the cipher object, used to encrypt the submitted text 
      **/
-    var cipher = new Cipher(request.body.inputtext);
+    var cipher = new Cipher(striptags(request.body.inputtext));
     var encryptedText = '';
     /**
      *  @note check which cipher was selected in request 

@@ -231,7 +231,7 @@ function updateComments(postid) {
 function addCipherKeyInput() {
     var cipherKeyInput = $(
         '<div class="form-group keywrapper">'+
-        '<label for="cipher-key">Choose a Key Phrase <em><small> [] </small><em/></label>'+
+        '<label for="cipher-key">Choose a Key Phrase</label>'+
         '<input id="cipher-key" name="cipherkey" class="form-control" autocomplete="no" placeholder="Choose a key for encryption" required="true">'+
         '</div>'
     );

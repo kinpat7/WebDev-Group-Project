@@ -14,7 +14,7 @@
     
     <xsl:template match="requests">
         <table class="table table-striped table-bordered">
-            <h2>Your Latest Encoded Messages</h2>
+            <h3>Recent Requests</h3>
             <thead>
                 <hr />
                 <tr>
