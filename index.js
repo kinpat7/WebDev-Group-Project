@@ -23,42 +23,42 @@ var Cipher = require('./public/res/js/lib/cipher.js');
 var XMLCleaner = require('./public/res/js/lib/XMLCleaner.js');
 var DateHelper = require('./public/res/js/lib/datehelper.js');
 
-/** 
- * @note GloBal variables 
+/**
+ * @note GloBal variables
  **/
 var ormdb;
 var xmlCleaner = new XMLCleaner();
 var xmlWriter = new XMLWriter(true);    /** true param if xml to be indented **/
 
 /**
- *  @note for calling js, and css files, etc... 
+ *  @note for calling js, and css files, etc...
  **/
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/xml'));
 app.set('views', __dirname + '/public/views');
 app.set('view engine', 'jade');
 
-/** 
+/**
  *  @note Connect to our MySQL DataBase
  **/
-orm.connect('mysql://natedrake13:@localhost/c9', function(err, db) {
+orm.connect(' postgres://dqxysoihjrnugu:haSGovhE6BEi5oAEX041_5Tr6v@ec2-54-243-202-174.compute-1.amazonaws.com:5432/d8646b4gc08tpa', function(err, db) {
     if (err) { throw err; }
     ormdb = db;
 });
 /**
- *  @note for parsing query string in url 
+ *  @note for parsing query string in url
  **/
 app.use(bodyParser.urlencoded({extended: false}));
 
 
 /**
- * 
+ *
  *  @note routes...
- * 
+ *
 **/
 
 /**
- *  @note Get Requests 
+ *  @note Get Requests
  **/
 app.get('/', function(request, response) {
     response.render('index');
@@ -105,7 +105,7 @@ app.get('/blog/:id', function(request, response) {
         comment: Number
     });
     /**
-     *  @note find post with given id 
+     *  @note find post with given id
      **/
     post.find({id: request.params.id}, 1, function(error, post) {
         /**
@@ -121,7 +121,7 @@ app.get('/blog/:id', function(request, response) {
                  **/
                 if (!error) {
                     /**
-                     *  @note if it's a valid post, render the post with the post 
+                     *  @note if it's a valid post, render the post with the post
                      *      details and list of comments
                      **/
                     response.render('post', {post: post[0], comments: comments});
@@ -136,7 +136,7 @@ app.get('/blog/:id', function(request, response) {
     });
 });
 /**
- *  @note serve our generated rss feeds. each item in the rss feed 
+ *  @note serve our generated rss feeds. each item in the rss feed
  *      is generated from our blog posts in the DB
  */
 app.get('/rss', function(request, response) {
@@ -201,7 +201,7 @@ app.get('/archive', function(request, response) {
 });
 
 /**
-*   @note Post Requests 
+*   @note Post Requests
 **/
 
 /**
@@ -209,7 +209,7 @@ app.get('/archive', function(request, response) {
  **/
 app.post('/enc', function(request, response) {
     /**
-     *  @note Define the model of our encryption request object 
+     *  @note Define the model of our encryption request object
      **/
     var entry = ormdb.define('requests', {
         id: Number,
@@ -219,12 +219,12 @@ app.post('/enc', function(request, response) {
         ip: String
     });
     /**
-     *  @note Create the cipher object, used to encrypt the submitted text 
+     *  @note Create the cipher object, used to encrypt the submitted text
      **/
     var cipher = new Cipher(striptags(request.body.inputtext));
     var encryptedText = '';
     /**
-     *  @note check which cipher was selected in request 
+     *  @note check which cipher was selected in request
      **/
     switch(request.body.cipherinput) {
         case 'cae':
@@ -269,7 +269,7 @@ app.post('/enc', function(request, response) {
  **/
 app.post('/removerequest/:id', function(request, response) {
     /**
-     *  @note define the model of our encryption request object 
+     *  @note define the model of our encryption request object
      **/
     var entry = ormdb.define('requests', {
         id: Number,
@@ -305,7 +305,7 @@ app.post('/removerequest/:id', function(request, response) {
  **/
 app.post('/requests', function(request, response) {
     /**
-     *  @note define our request entry model 
+     *  @note define our request entry model
      **/
     var entry = ormdb.define('requests', {
         id: Number,
@@ -315,45 +315,45 @@ app.post('/requests', function(request, response) {
         ip: String
     });
     /**
-     *  @note search the requests relation for any row with an 
-     *      ip attribute that matches the users ip address 
+     *  @note search the requests relation for any row with an
+     *      ip attribute that matches the users ip address
      **/
     entry.find({ip: getIP(request)}, 5, ["id", "Z"], function(error, results) {
         /**
-         *  @note always safe to check for errors 
+         *  @note always safe to check for errors
          **/
         if (!error) {
             /**
-             *  @note check if the user has ever made a request using their current ip address 
+             *  @note check if the user has ever made a request using their current ip address
              **/
             if (!results.length) {
-                /** 
-                 *  @note results, return message to user 
+                /**
+                 *  @note results, return message to user
                  **/
                 response.send('<div class="empty-table">No recent requests. Please submit a request!</div>');
             } else {
-                /** 
-                 *  @note there are some results from the table 
+                /**
+                 *  @note there are some results from the table
                  **/
                 var requests = {requests:[]};
                 for(var key in results) {
-                    /** 
-                     *  @note iterate through each request and add it to our json string 
+                    /**
+                     *  @note iterate through each request and add it to our json string
                      **/
                     requests.requests.push({
                         request: ((results[key]))
                     });
                 }
-                /** 
-                 *  @note convert the xml to json and parse the xml using nodexslt 
+                /**
+                 *  @note convert the xml to json and parse the xml using nodexslt
                  **/
                 var xml = nodexslt.readXmlString(json2xml(requests));
                 /**
-                 *  @note parse the xsl code for transformation 
+                 *  @note parse the xsl code for transformation
                  **/
                 var xslt = nodexslt.readXsltFile('./xml/style.xsl');
-                /** 
-                 *  @note send the transformed XHTML 
+                /**
+                 *  @note send the transformed XHTML
                  **/
                 response.send(nodexslt.transform(xslt, xml, []));
             }
@@ -362,7 +362,7 @@ app.post('/requests', function(request, response) {
 });
 
 /**
- *  @note ajax request to submit comment on blog post 
+ *  @note ajax request to submit comment on blog post
  **/
 app.post('/comment', function(request, response) {
     /**
@@ -379,7 +379,7 @@ app.post('/comment', function(request, response) {
      *  @note check if the comment body is submitted
      **/
     if (typeof(request.body.comment) !== undefined) {
-        /** 
+        /**
          *  @note make sure the comment body contains content
          *      no XSS sanitation. (very insecure)
          **/
@@ -387,9 +387,9 @@ app.post('/comment', function(request, response) {
             /**
              *  @note add the comment to the database
              **/
-            comment.create({ 
-                body: striptags(request.body.body), 
-                posted: new Date(), 
+            comment.create({
+                body: striptags(request.body.body),
+                posted: new Date(),
                 post: striptags(request.body.postid)
             }, function(err, results) {
                 /**
@@ -412,19 +412,19 @@ function updateXML() {
         requested: Date,
         ip: String
     });
-    
+
     entry.find({}, function(error, results) {
         /**
          *  @note throw any errors
          **/
         if (error)  { throw error; }
         /**
-         *  @note update our xml archive 
+         *  @note update our xml archive
          **/
         xmlWriter.startDocument();
         xmlWriter.startElement('cc:requests');
-        /** 
-         *  @note write namespace and schema definitions 
+        /**
+         *  @note write namespace and schema definitions
          **/
         xmlWriter
             .writeAttribute('xmlns:xsi','http://www.w3.org/2001/XMLSchema-instance')
@@ -435,8 +435,8 @@ function updateXML() {
          *  @note iterate through the result set
          **/
         for(var key in results) {
-            /** 
-             * @note create a datehelper object form UTC string passed from sql server 
+            /**
+             * @note create a datehelper object form UTC string passed from sql server
              *      SQL is returning date as Wed, 5 Nov 2015 16:51:12 GMT +0000 (UTC)
              *      using datehelper and Date.parse method we can return dd/mm/yyyy hh:ii:ss
             **/
@@ -451,15 +451,15 @@ function updateXML() {
             xmlWriter.endElement();  /** close the request element **/
         }
         /**
-         *  @note close the root element {requests} 
+         *  @note close the root element {requests}
          **/
         xmlWriter.endElement();
         /**
-         *  @note end the xml document 
+         *  @note end the xml document
          **/
         xmlWriter.endDocument();
         /**
-         *  @note check if the requests.xml file exists 
+         *  @note check if the requests.xml file exists
         **/
         fs.exists(__dirname+'/xml/requests.xml', function(exists) {
             if (exists) {
@@ -485,7 +485,7 @@ function updateXML() {
 }
 
 /**
- *  @note start an instance of the server 
+ *  @note start an instance of the server
  **/
 var server = app.listen((process.env.PORT || 8080), function () {
     var hostname = server.address().address;

@@ -41,20 +41,4 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	
-	<xs:element name="cc:original" type "xs:string">
-	<xs:element name="cc:encrypted" type "xs:string">
-	<xs:element name="cc:requested" type "xs:int">
-	<xs:element name="cc:ip" type "xs:decimal">
-	
-	<xs:element name="cc:request">
-      		<xs:complexType>
-        		<xs:sequence>
-          		<xs:element ref="cc:original" minOccurs="1" maxOccurs="1" />
-          		<xs:element ref="cc:encrypted" minOccurs="1" maxOccurs="1" />
-          		<xs:element ref="cc:requested" minOccurs="1" maxOccurs="1" />
-          		<xs:element ref="cc:ip" minOccurs="1" maxOccurs="1" />
-        		</xs:sequence>
-      		</xs:complexType>
-    	</xs:element>		
 </xs:schema>
